@@ -1,3 +1,4 @@
+import { BooksComponent } from "./books/books.component";
 import { LoginComponent } from "./login/login.component";
 import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
@@ -10,6 +11,10 @@ const routes: Routes = [
     path: "logout",
     component: LogoutComponent,
     canActivate: [AuthGuardService],
+  },
+  {
+    path: "books",
+    component: BooksComponent,
   },
 ];
 

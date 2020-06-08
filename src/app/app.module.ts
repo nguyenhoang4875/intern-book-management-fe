@@ -10,8 +10,16 @@ import { LoginComponent } from "./login/login.component";
 import { MaterialModule } from "./material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { BooksComponent } from "./books/books.component";
+import { BookListComponent } from "./books/book-list/book-list.component";
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    LogoutComponent,
+    BooksComponent,
+    BookListComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
