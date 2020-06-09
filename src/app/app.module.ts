@@ -1,3 +1,4 @@
+import { BookItemComponent } from './books/book-list/book-item/book-item.component';
 import { LogoutComponent } from "./logout/logout.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -9,9 +10,11 @@ import { MatSliderModule } from "@angular/material/slider";
 import { LoginComponent } from "./login/login.component";
 import { MaterialModule } from "./material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BooksComponent } from "./books/books.component";
 import { BookListComponent } from "./books/book-list/book-list.component";
+import { BasicAuthHttpInterceptorService } from './services/basic-auth-interceptor.service';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +22,8 @@ import { BookListComponent } from "./books/book-list/book-list.component";
     LogoutComponent,
     BooksComponent,
     BookListComponent,
+    BookItemComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ import { BookListComponent } from "./books/book-list/book-list.component";
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

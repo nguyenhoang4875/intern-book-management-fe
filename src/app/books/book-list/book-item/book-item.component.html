@@ -1,0 +1,8 @@
+<div class="book">
+  <img class="image-book" src="{{ book.image }}" />
+
+  <p class="title">{{ book.title | uppercase }}</p>
+  <p>Description: {{ book.description | slice: 0:50 }}...</p>
+  <p>Author: {{ book.author }}</p>
+  <p>Username: {{ book.username }}</p>
+</div>

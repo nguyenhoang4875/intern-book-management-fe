@@ -1,14 +1,6 @@
-@import 'theme';
-
-h1 {
-    color: $green;
-}
-
-.parent {
-    &--child {
-        color: blue;
-        &:hover {
-            color: red;
-        }
-    }
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  column-gap: 24px;
+  margin: 50px 100px;
 }

@@ -1,5 +1,7 @@
-
-<h1>ABC</h1>
-<div class="parent">
-  <div class="parent--child">123</div>
+<div class="book-container">
+  <app-book-item
+    *ngFor="let book of books; let i = index"
+    [book]="book"
+    [index]="i"
+  ></app-book-item>
 </div>
