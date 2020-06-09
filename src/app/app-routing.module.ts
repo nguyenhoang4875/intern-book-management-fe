@@ -1,3 +1,4 @@
+import { BookDetailComponent } from "./books/book-detail/book-detail.component";
 import { BooksComponent } from "./books/books.component";
 import { LoginComponent } from "./login/login.component";
 import { NgModule, Component } from "@angular/core";
@@ -15,6 +16,12 @@ const routes: Routes = [
   {
     path: "books",
     component: BooksComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "books/:id",
+    component: BookDetailComponent,
+    canActivate: [AuthGuardService],
   },
 ];
 

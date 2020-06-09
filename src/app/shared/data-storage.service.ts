@@ -1,5 +1,5 @@
 import { environment } from "./../../environments/environment.prod";
-import { Book } from "./../model/book.module";
+import { Book } from "../model/book.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map, tap } from "rxjs/operators";

@@ -1,6 +1,6 @@
 import { DataStorageService } from "./../../shared/data-storage.service";
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Book } from "src/app/model/book.module";
+import { Book } from "src/app/model/book.model";
 import { Subscription } from "rxjs";
 import { BookService } from "src/app/services/book.service";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -29,7 +29,6 @@ export class BookListComponent implements OnInit, OnDestroy {
       }
     );
     this.books = this.bookService.getBooks();
-    console.log(this.books);
   }
   onNewRecipe() {
     this.router.navigate(["new"], { relativeTo: this.route });
