@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -10,12 +11,13 @@ export class User {
   providedIn: "root",
 })
 export class AuthenticationService {
+  url = environment.baseUrl;
   constructor(private httpClient: HttpClient) {}
   // Provide username and password for authentication, and once authentication is successful,
-  //store JWT token in session
+  // store JWT token in session
   authenticate(username, password) {
     return this.httpClient
-      .post<any>("http://localhost:9000/api/login", { username, password })
+      .post<any>(this.url+"login", { username, password })
       .pipe(
         map((userData) => {
           sessionStorage.setItem("username", username);

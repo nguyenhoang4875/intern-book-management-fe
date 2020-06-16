@@ -33,4 +33,4 @@ export class BookService {
     this.books.splice(index, 1);
     this.booksChange.next(this.books.slice());
   }
-}
+} 

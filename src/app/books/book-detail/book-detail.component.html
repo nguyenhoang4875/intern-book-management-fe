@@ -1,4 +1,4 @@
-<div class="col-sm-12">
+<div class="container">
   <img class="image-book" src="{{ book.image }}" />
 
   <p class="title">{{ book.title | uppercase }}</p>
@@ -7,4 +7,31 @@
   <p>Created at: {{ book.createdAt | date: medium }}</p>
   <p>Updated at: {{ book.updatedAt | date: medium }}</p>
   <p>Username: {{ book.username }}</p>
+</div>
+
+<div class="container">
+  <input
+    type="text"
+    class="form-control"
+    name="message"
+    [(ngModel)]="message"
+  />
+  <button class="btn btn-success" (click)="saveComment()">Comment</button>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let comment of comments; let i = index">
+      <div class="container">
+        <p class="list-group-item-text">
+          {{ comment.message }}
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <p>{{ comment.username }}</p>
+        </div>
+        <div class="col-sm-4">
+          <p>{{ comment.createdAt | date: "medium" }}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

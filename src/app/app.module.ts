@@ -15,6 +15,7 @@ import { BooksComponent } from "./books/books.component";
 import { BookListComponent } from "./books/book-list/book-list.component";
 import { BasicAuthHttpInterceptorService } from './services/basic-auth-interceptor.service';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
     BooksComponent,
     BookListComponent,
     BookItemComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
