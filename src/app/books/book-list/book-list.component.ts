@@ -1,7 +1,7 @@
-import { BookStorageService } from "../../shared/book-storage.service";
+import { BookService } from 'src/app/shared/services/book.service';
+import { BookStorageService } from "../../shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
 import { Book } from "src/app/model/book.model";
-import { BookService } from "src/app/services/book.service";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({

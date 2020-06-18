@@ -1,5 +1,5 @@
-import { BookService } from 'src/app/services/book.service';
-import { BookStorageService } from "src/app/shared/book-storage.service";
+import { BookService } from 'src/app/shared/services/book.service';
+import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
 import { Book } from '../model/book.model';
 

@@ -1,6 +1,6 @@
-import { Book } from "../model/book.model";
+import { Book } from "../../model/book.model";
 import { Injectable } from "@angular/core";
-import { BaseApiService } from "../core/services/base-api.service";
+import { BaseApiService } from "../../core/services/base-api.service";
 import { Observable } from "rxjs";
 
 @Injectable({

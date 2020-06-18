@@ -1,10 +1,11 @@
-import { Comment } from "./../../model/comment.model";
-import { CommentStorageService } from "./../../shared/comment-storage.service";
-import { BookService } from "src/app/services/book.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Book } from "src/app/model/book.model";
-import { BookStorageService } from "src/app/shared/book-storage.service";
+import { Comment } from "src/app/model/comment.model";
+import { BookStorageService } from "src/app/shared/services/book-storage.service";
+import { BookService } from 'src/app/shared/services/book.service';
+import { CommentStorageService } from '../../services/comment-storage.service';
+
 
 @Component({
   selector: "app-book-detail",

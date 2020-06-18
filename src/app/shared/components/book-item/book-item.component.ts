@@ -7,8 +7,10 @@ import { Book } from 'src/app/model/book.model';
   styleUrls: ["./book-item.component.scss"],
 })
 export class BookItemComponent implements OnInit {
+  
   @Input() book: Book;
   @Input() index: number;
+
   constructor() {}
 
   ngOnInit() {}

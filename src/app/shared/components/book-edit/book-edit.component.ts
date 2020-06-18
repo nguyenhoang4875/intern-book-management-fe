@@ -1,4 +1,4 @@
-import { BookStorageService } from "src/app/shared/book-storage.service";
+import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, Params } from "@angular/router";

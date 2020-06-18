@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment.prod';
+import { environment } from '../../../environments/environment.prod';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -30,7 +30,6 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
     let user = sessionStorage.getItem("username");
-    console.log(!(user === null));
     return !(user === null);
   }
 

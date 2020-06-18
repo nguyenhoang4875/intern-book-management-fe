@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { Comment } from "../model/comment.model";
+import { Comment } from "../../model/comment.model";
 
 @Injectable({
   providedIn: "root",
