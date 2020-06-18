@@ -36,11 +36,8 @@ export abstract class BaseApiService {
   }
   
   public deleteElementById(id: number, parameter?: any): Observable<any> {
-    console.log(`${this.environmentUrl}${this.baseEndPoint}/${id}`);
-    
     return this.http.delete(
-      `${this.environmentUrl}${this.baseEndPoint}/${id}`,
-      parameter
+      `${this.environmentUrl}${this.baseEndPoint}/${id}`,parameter
     );
   }
 }

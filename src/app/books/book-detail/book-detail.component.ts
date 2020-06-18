@@ -48,12 +48,8 @@ export class BookDetailComponent implements OnInit {
   }
 
   public onDeleteBook() {
-    console.log("deleting");
-    
-    this.bookStorageService.deleteBookById(this.id);
+    this.bookStorageService.deleteBookById(this.id).subscribe();
     this.router.navigate(["/books"]);
-    console.log("deleted");
-    
   }
 
   public saveComment() {
