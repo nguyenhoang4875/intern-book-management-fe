@@ -11,7 +11,7 @@ export class CommentStorageService extends BaseApiService {
   protected baseEndPoint = 'comments';
 
   public fetchCommentsByPost(postId: number): Observable<Comment[]> {
-    return this.getAll('/'+postId.toString());
+    return this.getElements('/'+postId.toString());
   }
 
   public createComment(bookId: number, comment: Comment): Observable<any> {

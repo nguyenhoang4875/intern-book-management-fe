@@ -20,7 +20,12 @@ export class BookListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.bookStorageService.fetchBooks().subscribe((response: Book[]) => {
+    console.log(this.router.url);
+    var x = this.bookStorageService.fetchBooks();
+    if (this.router.url == "/mybooks") {
+      x = this.bookStorageService.fetchMyBooks();
+    }
+    x.subscribe((response: Book[]) => {
       this.books = response;
     });
     this.books = this.bookService.getBooks();
@@ -29,5 +34,4 @@ export class BookListComponent implements OnInit {
   onNewRecipe() {
     this.router.navigate(["new"], { relativeTo: this.route });
   }
- 
 }

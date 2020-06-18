@@ -13,7 +13,7 @@ export abstract class BaseApiService {
 
   constructor(protected http: HttpClient) {}
 
-  public getAll<T>(path: string, parameter?: any): Observable<any> {
+  public getElements<T>(path: string, parameter?: any): Observable<any> {
     return this.http.get<T>(
       `${this.environmentUrl}${this.baseEndPoint}${path}`,
       parameter

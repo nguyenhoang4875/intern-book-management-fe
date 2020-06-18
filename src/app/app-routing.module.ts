@@ -18,12 +18,26 @@ const routes: Routes = [
   {
     path: "books",
     component: BooksComponent,
+  },
+  {
+    path: "mybooks",
+    component: BooksComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "allbooks",
+    component: BooksComponent,
     canActivate: [AuthGuardService],
   },
   { path: "books/new", component: BookEditComponent },
 
   {
     path: "books/:id",
+    component: BookDetailComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "mybooks/:id",
     component: BookDetailComponent,
     canActivate: [AuthGuardService],
   },
