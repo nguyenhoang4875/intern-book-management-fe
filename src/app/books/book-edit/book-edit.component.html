@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="col-xs-12">
+    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!bookForm.valid"
+          >
+            Save
+          </button>
+          <button type="submit" class="btn btn-danger" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              class="form-control"
+              formControlName="title"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="image">Image URL</label>
+            <input
+              type="text"
+              id="image"
+              class="form-control"
+              formControlName="image"
+              #image
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="image.value" class="img-responsive" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="6"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              class="form-control"
+              formControlName="author"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

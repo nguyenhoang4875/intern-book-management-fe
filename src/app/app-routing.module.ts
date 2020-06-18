@@ -1,3 +1,4 @@
+import { BookEditComponent } from "./books/book-edit/book-edit.component";
 import { BookDetailComponent } from "./books/book-detail/book-detail.component";
 import { BooksComponent } from "./books/books.component";
 import { LoginComponent } from "./login/login.component";
@@ -7,7 +8,7 @@ import { LogoutComponent } from "./logout/logout.component";
 import { AuthGuardService } from "./services/auth-guard.service";
 
 const routes: Routes = [
-  { path: "", redirectTo:"/books",pathMatch:"full" },
+  { path: "", redirectTo: "/books", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   {
     path: "logout",
@@ -19,9 +20,16 @@ const routes: Routes = [
     component: BooksComponent,
     canActivate: [AuthGuardService],
   },
+  { path: "books/new", component: BookEditComponent },
+
   {
     path: "books/:id",
     component: BookDetailComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "books/:id/edit",
+    component: BookEditComponent,
     canActivate: [AuthGuardService],
   },
 ];

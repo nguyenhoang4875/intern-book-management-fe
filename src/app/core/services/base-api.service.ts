@@ -20,8 +20,8 @@ export abstract class BaseApiService {
     );
   }
 
-  public putElement(id: number, parameter: any): Observable<any> {
-    return this.http.put(`${id}`, parameter);
+  public updateElement(id: number, parameter: any): Observable<any> {
+    return this.http.put( `${this.environmentUrl}${this.baseEndPoint}/${id}`, parameter);
   }
 
   public createElement(path?: string, parameter?: any): Observable<any> {
@@ -36,6 +36,8 @@ export abstract class BaseApiService {
   }
   
   public deleteElementById(id: number, parameter?: any): Observable<any> {
+    console.log(`${this.environmentUrl}${this.baseEndPoint}/${id}`);
+    
     return this.http.delete(
       `${this.environmentUrl}${this.baseEndPoint}/${id}`,
       parameter

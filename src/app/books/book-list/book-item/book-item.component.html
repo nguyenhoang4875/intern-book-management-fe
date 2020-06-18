@@ -4,11 +4,10 @@
   routerLinkActive="active"
   class="list-group-item clearfix"
 >
-<div class="book">
-  <img class="image-book" src="{{ book.image }}" />
-
-  <p class="title">{{ book.title | uppercase }}</p>
-  <p>Author: {{ book.author }}</p>
-  <p>Username: {{ book.username }}</p>
-</div>
+  <div>
+    <img class="image-book" src="{{ book.image }}" />
+    <p class="title">{{ book.title | uppercase }}</p>
+    <p>Author: {{ book.author }}</p>
+    <p>Username: {{ book.username }}</p>
+  </div>
 </a>

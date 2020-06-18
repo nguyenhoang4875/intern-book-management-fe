@@ -11,7 +11,7 @@ export class BookStorageService extends BaseApiService {
 
   public baseEndPoint = "books";
 
-  public storeBook(book: Book): Observable<Book> {
+  public addBook(book: Book): Observable<Book> {
     return this.createElement("", book);
   }
 
@@ -21,5 +21,14 @@ export class BookStorageService extends BaseApiService {
 
   public getBookById(id: number): Observable<Book> {
     return this.getElementById(id);
+  }
+
+  public updateBook(id: number, book: Book): Observable<Book> {
+    return this.updateElement(id, book);
+  }
+  public deleteBookById(id: number): Observable<any> {
+    console.log("id: "+id);
+    
+    return this.deleteElementById(id);
   }
 }

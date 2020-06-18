@@ -33,29 +33,53 @@ export class BookDetailComponent implements OnInit {
         .getBookById(this.id)
         .subscribe((response: Book) => {
           this.book = response;
-          console.log(this.book);
         });
 
       this.commentStorageService
         .fetchCommentsByPost(this.id)
         .subscribe((response: Comment[]) => {
           this.comments = response;
-          console.log(this.comments);
         });
     });
   }
 
   public onEditBook() {
     this.router.navigate(["edit"], { relativeTo: this.route });
-    // this.router.navigate(['../',this.id, 'edit'],{relativeTo: this.route});
   }
 
   public onDeleteBook() {
-    this.bookService.deleteBook(this.id);
+    console.log("deleting");
+    
+    this.bookStorageService.deleteBookById(this.id);
     this.router.navigate(["/books"]);
+    console.log("deleted");
+    
   }
 
   public saveComment() {
+    console.log(this.message);
+    var comment = new Comment(this.message);
+    this.commentStorageService.createComment(this.id, comment).subscribe();
+    this.commentStorageService
+      .fetchCommentsByPost(this.id)
+      .subscribe((response: Comment[]) => {
+        this.comments = response;
+      });
+    this.message = "";
+  }
+
+  public updateComment() {
+    console.log(this.message);
+    var comment = new Comment(this.message);
+    this.commentStorageService.createComment(this.id, comment).subscribe();
+    this.commentStorageService
+      .fetchCommentsByPost(this.id)
+      .subscribe((response: Comment[]) => {
+        this.comments = response;
+      });
+    this.message = "";
+  }
+  public deleteComment() {
     console.log(this.message);
     var comment = new Comment(this.message);
     this.commentStorageService.createComment(this.id, comment).subscribe();
