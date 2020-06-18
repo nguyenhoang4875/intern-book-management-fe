@@ -36,8 +36,6 @@ export class BookStorageService extends BaseApiService {
     return this.updateElement(id, book);
   }
   public deleteBookById(id: number): Observable<any> {
-    console.log("id: "+id);
-    
     return this.deleteElementById(id);
   }
 }

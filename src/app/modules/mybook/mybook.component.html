@@ -1,0 +1,14 @@
+<div class="col-xs-12">
+    <a [routerLink]="['./new']">
+        <button class="btn btn-success">
+            New Book 
+        </button>
+    </a>
+</div>
+<div class="book-container list">
+    <app-book-item
+        *ngFor="let book of books"
+        [book]="book"
+        [index]="book.id"></app-book-item>
+</div>
+  

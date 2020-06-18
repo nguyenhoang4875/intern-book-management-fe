@@ -15,19 +15,20 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: "mybooks",
-    component: BooksComponent,
-    canActivate: [AuthGuardService],
+    path: 'books',
+    loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule)
+  },
+  {
+    path: 'mybooks',
+    loadChildren: () => import('./modules/mybook/mybook.module').then(m => m.MyBookModule),
+    canActivate:[AuthGuardService]
   },
   {
     path: "allbooks",
-    component: BooksComponent,
+    loadChildren: () => import('./modules/allbook/allbook.module').then(m => m.AllBookModule),
     canActivate: [AuthGuardService],
-  },
-  {
-    path: 'books',
-    loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule)
   }
+
 ];
 
 @NgModule({

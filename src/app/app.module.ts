@@ -1,3 +1,5 @@
+import { AllBookModule } from './modules/allbook/allbook.module';
+import { MyBookModule } from './modules/mybook/mybook.module';
 import { LoginModule } from './modules/login/login.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LogoutComponent } from "./logout/logout.component";
@@ -26,7 +28,9 @@ import { HeaderComponent } from './header/header.component';
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    LoginModule
+    LoginModule,
+    MyBookModule,
+    AllBookModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true }],
   bootstrap: [AppComponent],
