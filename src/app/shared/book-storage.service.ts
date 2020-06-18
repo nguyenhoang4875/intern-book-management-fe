@@ -8,6 +8,7 @@ import { Observable } from "rxjs";
 })
 export class BookStorageService extends BaseApiService {
   private readonly enabledEP = "/enabled";
+  private readonly mybooksEP = "/mybooks";
 
   public baseEndPoint = "books";
 
@@ -17,6 +18,10 @@ export class BookStorageService extends BaseApiService {
 
   public fetchBooks(): Observable<Book[]> {
     return this.getAll(this.enabledEP);
+  }
+
+  public fetchMyBooks(): Observable<Book[]> {
+    return this.getAll(this.mybooksEP);
   }
 
   public getBookById(id: number): Observable<Book> {

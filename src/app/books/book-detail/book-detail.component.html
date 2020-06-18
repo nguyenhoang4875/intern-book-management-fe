@@ -1,40 +1,49 @@
 <div class="container" *ngIf="book">
-  <img class="image-book" src="{{ book.image }}" />
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="text-center">
+        <img class="image-book" src="{{ book.image }}" />
 
-  <p class="title">{{ book.title | uppercase }}</p>
-  <p>Author: {{ book.author }}</p>
-  <p>Description: {{ book.description }}</p>
-  <p>Created at: {{ book.createdAt | date: medium }}</p>
-  <p>Updated at: {{ book.updatedAt | date: medium }}</p>
-  <p>Username: {{ book.username }}</p>
-  <button class="btn btn-primary" (click)="onEditBook()">Edit</button>
-  <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
-  <br />
-</div>
+        <p class="title">{{ book.title | uppercase }}</p>
+        <p>Author: {{ book.author }}</p>
+        <p>Description: {{ book.description }}</p>
+        <p>Created at: {{ book.createdAt | date: medium }}</p>
+        <p>Updated at: {{ book.updatedAt | date: medium }}</p>
+        <p>Username: {{ book.username }}</p>
+        <button class="btn btn-primary" (click)="onEditBook()">Edit</button>
+        <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
+        <br />
+      </div>
 
-<div class="container">
-  <input
-    type="text"
-    class="form-control"
-    name="message"
-    [(ngModel)]="message"
-  />
-  <button class="btn btn-success" (click)="saveComment()">Comment</button>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let comment of comments; let i = index">
       <div class="container">
-        <p class="list-group-item-text">
-          {{ comment.message }}
-        </p>
+        <input
+          type="text"
+          class="form-control"
+          name="message"
+          [(ngModel)]="message"
+        />
+        <button class="btn btn-success" (click)="saveComment()">Comment</button>
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let comment of comments; let i = index" 
+          >
+            <div class="container">
+              <p class="list-group-item-text">
+                {{ comment.message }}
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                <p>{{ comment.username }}</p>
+              </div>
+              <div class="col-sm-4">
+                <p>{{ comment.createdAt | date: "medium" }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <p>{{ comment.username }}</p>
-        </div>
-        <div class="col-sm-4">
-          <p>{{ comment.createdAt | date: "medium" }}</p>
-        </div>
-      </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>

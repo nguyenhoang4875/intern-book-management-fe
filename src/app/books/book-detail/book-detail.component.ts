@@ -53,13 +53,11 @@ export class BookDetailComponent implements OnInit {
   }
 
   public saveComment() {
-    console.log(this.message);
     var comment = new Comment(this.message);
-    this.commentStorageService.createComment(this.id, comment).subscribe();
     this.commentStorageService
-      .fetchCommentsByPost(this.id)
-      .subscribe((response: Comment[]) => {
-        this.comments = response;
+      .createComment(this.id, comment)
+      .subscribe((response: Comment) => {
+        this.comments.unshift(response);
       });
     this.message = "";
   }
@@ -75,6 +73,7 @@ export class BookDetailComponent implements OnInit {
       });
     this.message = "";
   }
+
   public deleteComment() {
     console.log(this.message);
     var comment = new Comment(this.message);
