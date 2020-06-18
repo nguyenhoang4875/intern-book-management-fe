@@ -31,17 +31,13 @@ export class BookEditComponent implements OnInit {
 
   onSubmit() {
     if (this.editMode) {
-      // this.recipeService.updateRecipe(this.id, this.recipeForm.value);
-      console.log("on edit mode");
-
       this.bookStorageService
         .updateBook(this.id, this.bookForm.value)
-        .subscribe((book: Book) => console.log(book));
+        .subscribe((book: Book) => (this.book = book));
     } else {
       this.bookStorageService
         .addBook(this.bookForm.value)
         .subscribe((response: Book) => {
-          console.log("this book added");
           console.log(response);
         });
     }
@@ -62,21 +58,13 @@ export class BookEditComponent implements OnInit {
       this.bookStorageService
         .getBookById(this.id)
         .subscribe((response: Book) => {
-          console.log("book inside of book edit");
-
           this.book = response;
-          console.log(this.book);
-
           bookTitle = this.book.title;
           bookImage = this.book.image;
           bookDescription = this.book.description;
           bookAuthor = this.book.author;
           console.log("get data form book edit: ");
 
-          console.log(bookTitle);
-          console.log(bookImage);
-          console.log(bookDescription);
-          console.log(bookAuthor);
           this.bookForm = new FormGroup({
             title: new FormControl(bookTitle, Validators.required),
             image: new FormControl(bookImage, Validators.required),
@@ -85,7 +73,6 @@ export class BookEditComponent implements OnInit {
           });
         });
     }
-
     this.bookForm = new FormGroup({
       title: new FormControl(bookTitle, Validators.required),
       image: new FormControl(bookImage, Validators.required),
