@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BookStorageService } from 'src/app/shared/services/book-storage.service';
-import { Book } from 'src/app/model/book.model';
+import { Book } from 'src/app/shared/model/book.model';
 
 @Component({
-  selector: 'app-allbook',
-  templateUrl: './allbook.component.html',
-  styleUrls: ['./allbook.component.scss']
+  selector: 'app-all-book',
+  templateUrl: './all-book.component.html',
+  styleUrls: ['./all-book.component.scss']
 })
 export class AllBookComponent implements OnInit {
 

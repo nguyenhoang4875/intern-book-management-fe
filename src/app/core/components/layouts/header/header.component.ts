@@ -1,7 +1,7 @@
 import { BookService } from 'src/app/shared/services/book.service';
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
-import { Book } from '../model/book.model';
+import { Book } from 'src/app/shared/model/book.model';
 
 @Component({
   selector: "app-header",
@@ -9,15 +9,7 @@ import { Book } from '../model/book.model';
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private bookStorageService: BookStorageService, private bookService: BookService) {}
+  constructor() {}
 
   ngOnInit() {}
-  public onMyBooks() {
-    console.log("on my books");
-    this.bookStorageService.fetchMyBooks().subscribe(
-      (books: Book[]) => {
-        this.bookService.setBooks(books);
-      }
-    )
-  }
 }

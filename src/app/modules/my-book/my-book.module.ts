@@ -1,19 +1,19 @@
-import { AllBookComponent } from './allbook.component';
+import { MyBookComponent } from './my-book.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AllBookRoutingModule } from './allbook-routing.module';
+import { MyBookRoutingModule } from './my-book-routing.module';
 
 
 @NgModule({
   declarations: [
-    AllBookComponent
+    MyBookComponent
   ],
   imports: [
     CommonModule,
-    AllBookRoutingModule,
+    MyBookRoutingModule,
     SharedModule
   ]
 })
-export class AllBookModule { }
+export class MyBookModule { }

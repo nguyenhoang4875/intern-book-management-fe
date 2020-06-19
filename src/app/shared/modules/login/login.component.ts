@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login() {
+  login(): void{
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
     }

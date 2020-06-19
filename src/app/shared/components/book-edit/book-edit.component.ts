@@ -1,8 +1,8 @@
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormArray, FormControl, Validators } from "@angular/forms";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router, Params } from "@angular/router";
-import { Book } from "src/app/model/book.model";
+import { Book } from "src/app/shared/model/book.model";
 
 @Component({
   selector: "app-book-edit",
@@ -18,18 +18,20 @@ export class BookEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bookStorageService: BookStorageService
+    private bookStorageService: BookStorageService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.initForm();
     this.route.params.subscribe((params: Params) => {
       this.id = +params["id"];
       this.editMode = params["id"] != null;
-      this.initForm();
+      this.initData();
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.editMode) {
       this.bookStorageService
         .updateBook(this.id, this.bookForm.value)
@@ -48,36 +50,28 @@ export class BookEditComponent implements OnInit {
     this.router.navigate(["../"], { relativeTo: this.route });
   }
 
-  private initForm() {
-    let bookTitle = "";
-    let bookImage = "";
-    let bookDescription = "";
-    let bookAuthor = "";
-
+  private initData(): void {
     if (this.editMode) {
       this.bookStorageService
         .getBookById(this.id)
         .subscribe((response: Book) => {
           this.book = response;
-          bookTitle = this.book.title;
-          bookImage = this.book.image;
-          bookDescription = this.book.description;
-          bookAuthor = this.book.author;
-          console.log("get data form book edit: ");
-
-          this.bookForm = new FormGroup({
-            title: new FormControl(bookTitle, Validators.required),
-            image: new FormControl(bookImage, Validators.required),
-            description: new FormControl(bookDescription, Validators.required),
-            author: new FormControl(bookAuthor, Validators.required),
+          this.bookForm.setValue({
+            title: response.title || "",
+            image: response.image || "",
+            description: response.description || "",
+            author: response.author || "",
           });
         });
     }
-    this.bookForm = new FormGroup({
-      title: new FormControl(bookTitle, Validators.required),
-      image: new FormControl(bookImage, Validators.required),
-      description: new FormControl(bookDescription, Validators.required),
-      author: new FormControl(bookAuthor, Validators.required),
+  }
+
+  private initForm(): void {
+    this.bookForm = this.formBuilder.group({
+      title: [null, Validators.required],
+      image: [null, Validators.required],
+      description: [null, Validators.required],
+      author: [null, Validators.required],
     });
   }
 }

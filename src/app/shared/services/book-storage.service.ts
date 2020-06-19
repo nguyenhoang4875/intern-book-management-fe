@@ -1,7 +1,7 @@
-import { Book } from "../../model/book.model";
 import { Injectable } from "@angular/core";
 import { BaseApiService } from "../../core/services/base-api.service";
 import { Observable } from "rxjs";
+import { Book } from '../model/book.model';
 
 @Injectable({
   providedIn: "root",
@@ -35,6 +35,7 @@ export class BookStorageService extends BaseApiService {
   public updateBook(id: number, book: Book): Observable<Book> {
     return this.updateElement(id, book);
   }
+  
   public deleteBookById(id: number): Observable<any> {
     return this.deleteElementById(id);
   }

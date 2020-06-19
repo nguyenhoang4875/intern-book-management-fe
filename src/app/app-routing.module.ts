@@ -1,13 +1,12 @@
-import { BooksComponent } from "./books/books.component";
 import { NgModule, Component } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { LogoutComponent } from "./logout/logout.component";
 import { AuthGuardService } from "./shared/services/auth-guard.service";
+import { LogoutComponent } from './core/components/layouts/logout/logout.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/books", pathMatch: "full" },
   { path: "login",
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./shared/modules/login/login.module').then(m => m.LoginModule)
   },
   {
     path: "logout",
@@ -19,13 +18,13 @@ const routes: Routes = [
     loadChildren: () => import('./modules/book/book.module').then(m => m.BookModule)
   },
   {
-    path: 'mybooks',
-    loadChildren: () => import('./modules/mybook/mybook.module').then(m => m.MyBookModule),
+    path: 'my-books',
+    loadChildren: () => import('./modules/my-book/my-book.module').then(m => m.MyBookModule),
     canActivate:[AuthGuardService]
   },
   {
-    path: "allbooks",
-    loadChildren: () => import('./modules/allbook/allbook.module').then(m => m.AllBookModule),
+    path: "all-books",
+    loadChildren: () => import('./modules/all-book/all-book.module').then(m => m.AllBookModule),
     canActivate: [AuthGuardService],
   }
 

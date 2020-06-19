@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, Params } from "@angular/router";
-import { Book } from "src/app/model/book.model";
-import { Comment } from "src/app/model/comment.model";
+import { Book } from "src/app/shared/model/book.model";
+import { Comment } from "src/app/shared/model/comment.model";
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { BookService } from 'src/app/shared/services/book.service';
 import { CommentStorageService } from '../../services/comment-storage.service';
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -30,30 +31,30 @@ export class BookDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params["id"];
       console.log("id: " + this.id);
-      this.bookStorageService
-        .getBookById(this.id)
-        .subscribe((response: Book) => {
-          this.book = response;
-        });
+      const getBookB$ = this.bookStorageService.getBookById(this.id);
+      const getComments$ = this.commentStorageService.fetchCommentsByPost(this.id);
 
-      this.commentStorageService
-        .fetchCommentsByPost(this.id)
-        .subscribe((response: Comment[]) => {
-          this.comments = response;
-        });
+      combineLatest(getBookB$, getComments$).subscribe(
+        ([bookResponse, commentResponse]) => {
+          this.book = bookResponse;
+          this.comments = commentResponse;
+        }, (error) => {
+          console.log(error);
+        }
+      )
     });
   }
 
-  public onEditBook() {
+public onEditBook():void {
     this.router.navigate(["edit"], { relativeTo: this.route });
   }
 
-  public onDeleteBook() {
+  public onDeleteBook(): void {
     this.bookStorageService.deleteBookById(this.id).subscribe();
     this.router.navigate(["/books"]);
   }
 
-  public saveComment() {
+  public saveComment(): void {
     var comment = new Comment(this.message);
     this.commentStorageService
       .createComment(this.id, comment)
@@ -63,7 +64,7 @@ export class BookDetailComponent implements OnInit {
     this.message = "";
   }
 
-  public updateComment() {
+  public updateComment(): void {
     console.log(this.message);
     var comment = new Comment(this.message);
     this.commentStorageService.createComment(this.id, comment).subscribe();
@@ -75,7 +76,7 @@ export class BookDetailComponent implements OnInit {
     this.message = "";
   }
 
-  public deleteComment() {
+  public deleteComment(): void {
     console.log(this.message);
     var comment = new Comment(this.message);
     this.commentStorageService.createComment(this.id, comment).subscribe();
