@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BaseApiService } from "../../core/services/base-api.service";
 import { Observable } from "rxjs";
-import { Book } from '../model/book.model';
+import { Book } from "../model/book.model";
 
 @Injectable({
   providedIn: "root",
@@ -35,8 +35,15 @@ export class BookStorageService extends BaseApiService {
   public updateBook(id: number, book: Book): Observable<Book> {
     return this.updateElement(id, book);
   }
-  
+
   public deleteBookById(id: number): Observable<any> {
     return this.deleteElementById(id);
+  }
+
+  public postFile(fileToUpload: File): Observable<any> {
+    const endpoint = "http://localhost:9000/api/images";
+    const formData: FormData = new FormData();
+    formData.append("file", fileToUpload, fileToUpload.name);
+    return this.http.post(endpoint, formData);
   }
 }

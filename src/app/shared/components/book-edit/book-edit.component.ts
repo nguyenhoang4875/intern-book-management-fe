@@ -14,7 +14,7 @@ export class BookEditComponent implements OnInit {
   private editMode = false;
   private bookForm: FormGroup;
   private book: Book;
-
+  private fileToUpload: File = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,7 +46,7 @@ export class BookEditComponent implements OnInit {
     this.onCancel();
   }
 
-  onCancel() {
+  public onCancel(): void {
     this.router.navigate(["../"], { relativeTo: this.route });
   }
 
@@ -73,5 +73,23 @@ export class BookEditComponent implements OnInit {
       description: [null, Validators.required],
       author: [null, Validators.required],
     });
+  }
+
+  public handleFileInput(files: FileList): void {
+    this.fileToUpload = files.item(0);
+    console.log(this.fileToUpload);
+  }
+  public onSaveImage(): void {
+    const url = "http://localhost:9000/api/images/";
+    console.log(url);
+    
+    this.bookStorageService
+      .postFile(this.fileToUpload)
+      .subscribe((response) => {
+        console.log(response);
+        this.bookForm.patchValue({
+          image: url + response.fileName,
+        });
+      });
   }
 }
