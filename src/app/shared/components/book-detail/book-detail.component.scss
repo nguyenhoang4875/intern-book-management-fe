@@ -1,0 +1,42 @@
+.image-book-detail {
+  border-radius: 15px;
+  height: 450px;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-book-detail {
+  margin-top: 50px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.title-book {
+  margin-top: 10px;
+  font-size: 18px;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.comment-form {
+  display: flex;
+  margin-top: 50px;
+}
+
+.comment-detail {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  padding: 0.5rem 0.5rem;
+  background-color: #fbfbfb;
+}
+.comment-user {
+    color:    #285b9e;
+}
+
+.comment-date {
+    color: #797777;
+    font-size: small;
+    font-style: italic;
+}
+
