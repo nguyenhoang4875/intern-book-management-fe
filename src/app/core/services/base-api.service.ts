@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export abstract class BaseApiService {
-  private readonly environmentUrl = environment.baseUrl;
+  public readonly environmentUrl = environment.baseUrl;
 
   protected abstract baseEndPoint;
 

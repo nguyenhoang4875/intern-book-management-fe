@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Book } from "src/app/shared/model/book.model";
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: "app-book-edit",
@@ -15,6 +16,7 @@ export class BookEditComponent implements OnInit {
   private bookForm: FormGroup;
   private book: Book;
   private fileToUpload: File = null;
+  private readonly environmentUrl = environment.baseUrl;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -80,15 +82,13 @@ export class BookEditComponent implements OnInit {
     console.log(this.fileToUpload);
   }
   public onSaveImage(): void {
-    const url = "http://localhost:9000/api/images/";
-    console.log(url);
     
     this.bookStorageService
       .postFile(this.fileToUpload)
       .subscribe((response) => {
         console.log(response);
         this.bookForm.patchValue({
-          image: url + response.fileName,
+          image: this.environmentUrl+"images/"+ response.fileName,
         });
       });
   }

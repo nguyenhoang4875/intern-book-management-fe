@@ -9,6 +9,7 @@ import { Book } from "../model/book.model";
 export class BookStorageService extends BaseApiService {
   private readonly enabledEP = "/enabled";
   private readonly myBooksEP = "/mybooks";
+  private readonly imagesEP = "images";
 
   public baseEndPoint = "books";
 
@@ -41,9 +42,8 @@ export class BookStorageService extends BaseApiService {
   }
 
   public postFile(fileToUpload: File): Observable<any> {
-    const endpoint = "http://localhost:9000/api/images";
     const formData: FormData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
-    return this.http.post(endpoint, formData);
+    return this.http.post(this.environmentUrl+this.imagesEP, formData);
   }
 }
