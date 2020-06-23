@@ -1,62 +1,58 @@
-<div class="container">
-  <div class="col-xs-12">
-    <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-xs-12">
-          <button
-            type="submit"
-            class="btn btn-success"
-            [disabled]="!bookForm.valid"
-          >
-            Save
+<div class="container mt-5">
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngIf="imgURL; else use_image">
+          <img [src]="imgURL" class="img-responsive image-book-detail" />
+        </div>
+        <ng-template #use_image>
+          <img [src]="image.value" class="img-responsive image-book-detail" />
+        </ng-template>
+        <div class="form-group">
+          <label for="image">Image URL</label>
+          <input
+            type="text"
+            id="image"
+            class="form-control"
+            formControlName="image"
+            #image
+          />
+        </div>
+        <div class="form-group">
+          <label for="file-upload" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Upload
+          </label>
+          <input
+            type="file"
+            id="file-upload"
+            #file
+            accept="image/*"
+            (change)="handleFileInput($event.target.files); preview(file.files)"
+          />
+          <button type="button" class="btn btn-primary" (click)="onSaveImage()">
+            Save Image
           </button>
-          <button type="submit" class="btn btn-danger" (click)="onCancel()">
-            Cancel
-          </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              class="form-control"
-              formControlName="title"
-            />
-          </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            formControlName="title"
+          />
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="image">Image URL</label>
-            <input
-              type="text"
-              id="image"
-              class="form-control"
-              formControlName="image"
-              #image
-            />
-          </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            class="form-control"
+            formControlName="author"
+          />
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <img [src]="image.value" class="img-responsive" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="file">Choose File</label>
-        <input
-          type="file"
-          id="file"
-          (change)="handleFileInput($event.target.files)"
-        />
-        <button type="button" class="btn btn-primary" (click)="onSaveImage()">Save Image</button>
-      </div>
-      <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="description">Description</label>
@@ -68,21 +64,18 @@
               rows="6"
             ></textarea>
           </div>
+          <button
+            type="submit"
+            class="btn btn-success mr-2"
+            [disabled]="!bookForm.valid"
+          >
+            Save
+          </button>
+          <button type="submit" class="btn btn-danger" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="author">Author</label>
-            <input
-              type="text"
-              id="author"
-              class="form-control"
-              formControlName="author"
-            />
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

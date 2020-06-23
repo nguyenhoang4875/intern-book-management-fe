@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Book } from "src/app/shared/model/book.model";
-import { environment } from 'src/environments/environment.prod';
+import { environment } from "src/environments/environment.prod";
 
 @Component({
   selector: "app-book-edit",
@@ -17,6 +17,7 @@ export class BookEditComponent implements OnInit {
   private book: Book;
   private fileToUpload: File = null;
   private readonly environmentUrl = environment.baseUrl;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -82,14 +83,37 @@ export class BookEditComponent implements OnInit {
     console.log(this.fileToUpload);
   }
   public onSaveImage(): void {
-    
     this.bookStorageService
       .postFile(this.fileToUpload)
       .subscribe((response) => {
         console.log(response);
         this.bookForm.patchValue({
-          image: this.environmentUrl+"images/"+ response.fileName,
+          image: this.environmentUrl + "images/" + response.fileName,
         });
       });
+  }
+
+  public imagePath;
+  imgURL: any;
+  public message: string;
+
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+
+    var mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    console.log("image path:");
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    };
   }
 }
