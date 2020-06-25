@@ -1,14 +1,30 @@
+<!-- Search form -->
+<form
+  class="form-inline d-flex justify-content-center md-form form-sm active-pink-2 mt-2"
+>
+  <input
+    class="form-control form-control-sm w-25"
+    type="text"
+    name="search"
+    [(ngModel)]="search"
+    placeholder="Search"
+    aria-label="Search"
+  />
+  <button class="btn btn-light"  (click) = "onSearch()">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+</form>
 <div class="container ml-1 mt-2">
-    <a [routerLink]="['./new']">
-        <button class="btn btn-success">
-            New Book 
-        </button>
-    </a>
+  <a [routerLink]="['./new']">
+    <button class="btn btn-success">
+      New Book
+    </button>
+  </a>
 </div>
 <div class="book-container list">
-    <app-book-item
-        *ngFor="let book of books"
-        [book]="book"
-        [index]="book.id"></app-book-item>
+  <app-book-item
+    *ngFor="let book of books"
+    [book]="book"
+    [index]="book.id"
+  ></app-book-item>
 </div>
-  
