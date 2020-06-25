@@ -1,4 +1,5 @@
-import { environment } from '../../../environments/environment.prod';
+import { Observable } from "rxjs";
+import { environment } from "../../../environments/environment.prod";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -17,7 +18,7 @@ export class AuthenticationService {
   // store JWT token in session
   authenticate(username, password) {
     return this.httpClient
-      .post<any>(this.url+"login", { username, password })
+      .post<any>(this.url + "login", { username, password })
       .pipe(
         map((userData) => {
           sessionStorage.setItem("username", username);
@@ -36,5 +37,9 @@ export class AuthenticationService {
   logout() {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("token");
+  }
+
+  public checkRoleAdmin(): Observable<any> {
+    return this.httpClient.get(this.url + "admin");
   }
 }

@@ -1,12 +1,11 @@
+import { AuthenticationService } from "src/app/shared/services/authentication.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { Book } from "src/app/shared/model/book.model";
 import { Comment } from "src/app/shared/model/comment.model";
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
-import { BookService } from 'src/app/shared/services/book.service';
-import { CommentStorageService } from '../../services/comment-storage.service';
-import { combineLatest } from 'rxjs';
-
+import { CommentStorageService } from "../../services/comment-storage.service";
+import { combineLatest } from "rxjs";
 
 @Component({
   selector: "app-book-detail",
@@ -18,13 +17,14 @@ export class BookDetailComponent implements OnInit {
   public id: number;
   public message: string;
   public comments: Array<Comment> = [];
+  public isLogin: boolean;
 
   constructor(
-    private bookService: BookService,
     private route: ActivatedRoute,
     private router: Router,
     private bookStorageService: BookStorageService,
-    private commentStorageService: CommentStorageService
+    private commentStorageService: CommentStorageService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -32,20 +32,24 @@ export class BookDetailComponent implements OnInit {
       this.id = +params["id"];
       console.log("id: " + this.id);
       const getBookB$ = this.bookStorageService.getBookById(this.id);
-      const getComments$ = this.commentStorageService.fetchCommentsByPost(this.id);
+      const getComments$ = this.commentStorageService.fetchCommentsByPost(
+        this.id
+      );
+      this.isLogin = this.authenticationService.isUserLoggedIn();
 
       combineLatest(getBookB$, getComments$).subscribe(
         ([bookResponse, commentResponse]) => {
           this.book = bookResponse;
           this.comments = commentResponse;
-        }, (error) => {
+        },
+        (error) => {
           console.log(error);
         }
-      )
+      );
     });
   }
 
-public onEditBook():void {
+  public onEditBook(): void {
     this.router.navigate(["edit"], { relativeTo: this.route });
   }
 

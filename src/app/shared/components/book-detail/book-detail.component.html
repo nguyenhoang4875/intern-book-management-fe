@@ -9,15 +9,19 @@
       <p>Description: {{ book.description }}</p>
       <p>Created at: {{ book.createdAt | date: medium }}</p>
       <p>Updated at: {{ book.updatedAt | date: medium }}</p>
-      <p>Username: {{ book.username }}</p>
-      <button class="btn btn-primary mr-2" (click)="onEditBook()">Edit</button>
-      <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
+      <p>Created by: {{ book.username }}</p>
+      <div *ngIf="isLogin">
+        <button class="btn btn-primary mr-2" (click)="onEditBook()">
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="onDeleteBook()">Delete</button>
+      </div>
       <br />
     </div>
   </div>
 
   <div class="container">
-    <div class="comment-form">
+    <div class="comment-form" *ngIf="isLogin">
       <input
         type="text"
         class="form-control"

@@ -15,13 +15,22 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item" routerLinkActive="router-link-active">
-        <a class="nav-link" [routerLink]="['/my-books']" 
+      <li
+        class="nav-item"
+        routerLinkActive="router-link-active"
+        *ngIf="isLogin"
+      >
+        <a class="nav-link" [routerLink]="['/my-books']"
           >My Books <span class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/all-books']" routerLinkActive="router-link-active" >AllBooks</a>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a
+          class="nav-link"
+          [routerLink]="['/all-books']"
+          routerLinkActive="router-link-active"
+          >AllBooks</a
+        >
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
@@ -44,13 +53,21 @@
   </form>
 
   <ul class="nav navbar-nav navbar-right">
-    <li class="nav-item">
+    <div class="nav-item" *ngIf="isLogin; else login">
       <a
         class="nav-link"
         [routerLink]="['/logout']"
         routerLinkActive="router-link-active"
         >Logout</a
       >
-    </li>
+    </div>
+    <ng-template #login>
+      <a
+        class="nav-link"
+        [routerLink]="['/login']"
+        routerLinkActive="router-link-active" >
+        Login
+      </a>
+    </ng-template>
   </ul>
 </nav>
