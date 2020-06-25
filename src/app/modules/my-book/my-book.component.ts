@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { BookStorageService } from 'src/app/shared/services/book-storage.service';
-import { Book } from 'src/app/shared/model/book.model';
+import { Component, OnInit } from "@angular/core";
+import { BookStorageService } from "src/app/shared/services/book-storage.service";
+import { Book } from "src/app/shared/model/book.model";
+import { BookAbstract } from "../book-abstract/book.abstract";
 
 @Component({
-  selector: 'app-my-book',
-  templateUrl: './my-book.component.html',
-  styleUrls: ['./my-book.component.scss']
+  selector: "app-my-book",
+  templateUrl: "./my-book.component.html",
+  styleUrls: ["./my-book.component.scss"],
 })
-export class MyBookComponent implements OnInit {
-  public books: Book[] = [];
-
-  constructor(
-    private bookStorageService: BookStorageService
-  ) { }
-
-  ngOnInit() {
-    this.bookStorageService.fetchMyBooks().subscribe(response => {
-      this.books = response;
-    });
+export class MyBookComponent extends BookAbstract {
+  constructor(public bookStorageService: BookStorageService) {
+    super(bookStorageService);
   }
 
+  getBooks() {
+    this.bookStorageService.fetchMyBooks().subscribe((response) => {
+      this.books = response;
+      this.originBooks = response;
+    });
+  }
 }

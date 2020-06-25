@@ -1,3 +1,4 @@
+import { SearchComponent } from './components/search/search.component';
 import { RouterModule } from '@angular/router';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
@@ -10,7 +11,8 @@ import { MaterialModule } from '../material.module';
 const components = [
   BookItemComponent,
   BookEditComponent,
-  BookDetailComponent
+  BookDetailComponent,
+  SearchComponent
 ];
 
 const modules = [

@@ -13,7 +13,11 @@ import { BasicAuthHttpInterceptorService } from "./shared/services/basic-auth-in
 import { HeaderComponent } from "./core/components/layouts/header/header.component";
 import { LogoutComponent } from "./core/components/layouts/logout/logout.component";
 @NgModule({
-  declarations: [AppComponent, LogoutComponent, HeaderComponent],
+  declarations: [
+    AppComponent, 
+    LogoutComponent, 
+    HeaderComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
