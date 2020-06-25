@@ -10,7 +10,7 @@
       <p>Created at: {{ book.createdAt | date: medium }}</p>
       <p>Updated at: {{ book.updatedAt | date: medium }}</p>
       <p>Created by: {{ book.username }}</p>
-      <div *ngIf="isLogin">
+      <div>
         <button class="btn btn-primary mr-2" (click)="onEditBook()">
           Edit
         </button>

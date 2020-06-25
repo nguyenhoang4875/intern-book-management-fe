@@ -1,42 +1,51 @@
-import { Observable } from "rxjs";
+import { LocalStorageEnum } from "./../enums/local-storage.enum";
+import { Observable, BehaviorSubject } from "rxjs";
 import { environment } from "../../../environments/environment.prod";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-
-export class User {
-  constructor(public status: string) {}
-}
+import { User } from "../model/user.model";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthenticationService {
   url = environment.baseUrl;
-  constructor(private httpClient: HttpClient) {}
-  // Provide username and password for authentication, and once authentication is successful,
-  // store JWT token in session
-  authenticate(username, password) {
+  public currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
+  
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
+
+  public authenticate(username, password): Observable<User> {
     return this.httpClient
       .post<any>(this.url + "login", { username, password })
       .pipe(
         map((userData) => {
-          sessionStorage.setItem("username", username);
+          const newUser = new User(username, userData.token);
+          localStorage.setItem(LocalStorageEnum.USER, JSON.stringify(newUser));
           let tokenStr = "Bearer " + userData.token;
-          sessionStorage.setItem("token", tokenStr);
+          this.currentUser.next(new User(username, userData.token));
           return userData;
         })
       );
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem("username");
-    return !(user === null);
+  public getUserFromLocalStorage(): User {
+    const user = localStorage.getItem(LocalStorageEnum.USER);
+    if (user && JSON.parse(user)) {
+      this.currentUser.next(JSON.parse(user));
+      return JSON.parse(user) as User;
+    }
+    return null;
   }
 
   logout() {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("token");
+    this.currentUser.next(null);
+    localStorage.clear();
+    this.router.navigate(["/logout"]);
   }
 
   public checkRoleAdmin(): Observable<any> {

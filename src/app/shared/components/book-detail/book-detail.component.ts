@@ -35,8 +35,6 @@ export class BookDetailComponent implements OnInit {
       const getComments$ = this.commentStorageService.fetchCommentsByPost(
         this.id
       );
-      this.isLogin = this.authenticationService.isUserLoggedIn();
-
       combineLatest(getBookB$, getComments$).subscribe(
         ([bookResponse, commentResponse]) => {
           this.book = bookResponse;
