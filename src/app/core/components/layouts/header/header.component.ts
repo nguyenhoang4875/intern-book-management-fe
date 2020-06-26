@@ -1,8 +1,5 @@
 import { Router } from "@angular/router";
-import { BookService } from "src/app/shared/services/book.service";
-import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
-import { Book } from "src/app/shared/model/book.model";
 import { AuthenticationService } from "src/app/shared/services/authentication.service";
 import { User } from "src/app/shared/model/user.model";
 
@@ -26,11 +23,5 @@ export class HeaderComponent implements OnInit {
     if (!user) {
       this.authenticationService.logout();
     }
-    
-    this.authenticationService
-      .checkRoleAdmin()
-      .subscribe((response: boolean) => {
-        this.isAdmin = response;
-      });
   }
 }

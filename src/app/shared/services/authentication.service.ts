@@ -43,8 +43,4 @@ export class AuthenticationService {
     localStorage.clear();
     this.router.navigate(["/logout"]);
   }
-
-  public checkRoleAdmin(): Observable<any> {
-    return this.httpClient.get(this.url + "admin");
-  }
 }

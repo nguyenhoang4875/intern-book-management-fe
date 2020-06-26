@@ -33,6 +33,12 @@ const routes: Routes = [
       import("./modules/all-book/all-book.module").then((m) => m.AllBookModule),
     canActivate: [AdminGuardService],
   },
+  {
+    path: "users",
+    loadChildren: () =>
+      import("./modules/user/user.module").then((m) => m.UserModule),
+    canActivate: [AdminGuardService],
+  },
 ];
 
 @NgModule({
