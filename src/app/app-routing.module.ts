@@ -1,3 +1,4 @@
+import { AdminGuardService } from "./shared/services/admin-guard.service";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuardService } from "./shared/services/auth-guard.service";
@@ -30,7 +31,7 @@ const routes: Routes = [
     path: "all-books",
     loadChildren: () =>
       import("./modules/all-book/all-book.module").then((m) => m.AllBookModule),
-    canActivate: [AuthGuardService],
+    canActivate: [AdminGuardService],
   },
 ];
 

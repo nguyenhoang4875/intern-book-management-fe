@@ -1,18 +1,118 @@
-<app-search
-  [books]="originBooks"
-  (searchEmitter)="onSearch($event)"
-></app-search>
-<div class="container ml-1 mt-2">
-  <a [routerLink]="['./new']">
-    <button class="btn btn-success">
-      New Book
-    </button>
-  </a>
-</div>
-<div class="book-container list">
-  <app-book-item
-    *ngFor="let book of books"
-    [book]="book"
-    [index]="book.id"
-  ></app-book-item>
+<link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
+
+<div class="container" *ngIf="!isLoading">
+  <div class="container-fluid" [style.margin-top.px]="30">
+    <div class="top-main">
+      <app-search
+        [books]="originBooks"
+        (searchEmitter)="onSearch($event)"
+      ></app-search>
+      <button
+        class="btn btn-success"
+        [routerLink]="['/new']"
+        routerLinkActive="router-link-active"
+      >
+        + New Book
+      </button>
+    </div>
+
+    <div class="row bg-white">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
+        <div
+          class="row shadow"
+          style="left: auto !important; right: 0; min-width: auto;"
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Created at</th>
+                <th>Update at</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let book of books">
+                <td>{{ book.id }}</td>
+                <td><img class="image-book-list" src="{{ book.image }}" /></td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.createdAt | date }}</td>
+                <td>{{ book.updatedAt | date }}</td>
+                <td>
+                  <span
+                    style="cursor: pointer;"
+                    [class]="
+                      book.enabled ? 'badge badge-success' : 'badge badge-danger'
+                    "
+                    >{{ book.enabled ? "Enabled" : "Disabled" }}</span
+                  >
+                </td>
+                <td style="text-align: center; width: 135px;">
+                  <i
+                    class="far fa-eye idetail mr-2"
+                    [routerLink]="[book.id]"
+                  ></i>
+                  <i
+                    class="far fa-edit iedit mr-2"
+                    [routerLink]="[book.id, 'edit']"
+                  ></i>
+                  <i
+                    class="far fa-trash-alt idelete"
+                    (click)="deleteBook(book.id)"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination mt-5">
+            <li class="page-item">
+              <a
+                [class]="currentPage == 1 ? 'disabled page-link' : 'page-link'"
+                href="javascript:void(0)"
+                aria-label="Previous"
+                (click)="onPreviousPage()"
+              >
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            <li class="page-item" *ngFor="let data of pagesArr">
+              <a
+                [class.selected]="data === currentPage"
+                class="page-link active"
+                href="javascript:void(0)"
+                (click)="onSelectPage(data)"
+                >{{ data }}</a
+              >
+            </li>
+
+            <li class="page-item">
+              <a
+                [class.disabled]="currentPage == pages"
+                class="page-link"
+                href="javascript:void(0)"
+                aria-label="Next"
+                (click)="onNextPage()"
+              >
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
 </div>

@@ -6,7 +6,7 @@ export class Book {
   public image: string;
   public createdAt: Date;
   public updatedAt: Date;
-  public enabled: number;
+  public enabled: boolean;
   public username: string;
 
   constructor(
@@ -17,7 +17,7 @@ export class Book {
     image: string,
     createdAt: Date,
     updatedAt: Date,
-    enabled: number,
+    enabled: boolean,
     username: string
   ) {
     this.id = id;
