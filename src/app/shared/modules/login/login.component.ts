@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { AuthenticationService } from "src/app/shared/services/authentication.service";
 
 @Component({
   selector: "app-login",
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login(): void{
+  login(): void {
     if (this.form.valid) {
       this.submitEM.emit(this.form.value);
     }

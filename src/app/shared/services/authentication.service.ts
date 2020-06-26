@@ -13,21 +13,17 @@ import { Router } from "@angular/router";
 export class AuthenticationService {
   url = environment.baseUrl;
   public currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
-  
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router
-  ) {}
+
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   public authenticate(username, password): Observable<User> {
     return this.httpClient
       .post<any>(this.url + "login", { username, password })
       .pipe(
         map((userData) => {
-          const newUser = new User(username, userData.token);
+          const newUser = new User(userData.username, userData.token, userData.roles);
           localStorage.setItem(LocalStorageEnum.USER, JSON.stringify(newUser));
-          let tokenStr = "Bearer " + userData.token;
-          this.currentUser.next(new User(username, userData.token));
+          this.currentUser.next(newUser);
           return userData;
         })
       );
