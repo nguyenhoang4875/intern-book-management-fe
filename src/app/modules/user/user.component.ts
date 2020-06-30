@@ -15,7 +15,11 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userStorageService.fetchUsers().subscribe((response: UserDetail[]) => {
       console.log(response);
-      this.users= response;
-    })
+      this.users = response;
+    });
+  }
+  public deleteUse(id: number): void {
+    console.log("user id: "+ id);
+    
   }
 }

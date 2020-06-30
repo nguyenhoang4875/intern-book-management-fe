@@ -31,7 +31,7 @@ export class AdminGuardService implements CanActivate {
     if (isValid) {
       return true;
     } else {
-      this.router.navigate(["login"]);
+      this.router.navigate(["books"]);
       return false;
     }
   }

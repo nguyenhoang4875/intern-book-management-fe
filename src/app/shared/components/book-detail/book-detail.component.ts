@@ -1,3 +1,4 @@
+import { MatDialog } from "@angular/material";
 import { AuthenticationService } from "src/app/shared/services/authentication.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router, Params } from "@angular/router";
@@ -6,6 +7,7 @@ import { Comment } from "src/app/shared/model/comment.model";
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { CommentStorageService } from "../../services/comment-storage.service";
 import { combineLatest } from "rxjs";
+import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: "app-book-detail",
@@ -17,14 +19,15 @@ export class BookDetailComponent implements OnInit {
   public id: number;
   public message: string;
   public comments: Array<Comment> = [];
-  public isLogin: boolean;
+  private isLogin = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private bookStorageService: BookStorageService,
     private commentStorageService: CommentStorageService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -45,6 +48,9 @@ export class BookDetailComponent implements OnInit {
         }
       );
     });
+    if (this.authenticationService.getUserFromLocalStorage() != null) {
+      this.isLogin = true;
+    }
   }
 
   public onEditBook(): void {
@@ -52,8 +58,13 @@ export class BookDetailComponent implements OnInit {
   }
 
   public onDeleteBook(): void {
-    this.bookStorageService.deleteBookById(this.id).subscribe();
-    this.router.navigate(["/books"]);
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    dialogRef.afterClosed().subscribe((response: boolean) => {
+      if (response === true) {
+        this.bookStorageService.deleteBookById(this.id).subscribe();
+        this.router.navigate(["/books"]);
+      }
+    });
   }
 
   public saveComment(): void {

@@ -1,8 +1,10 @@
+import { ConfirmationDialogComponent } from "./../../shared/components/confirmation-dialog/confirmation-dialog.component";
 import { BookStorageService } from "src/app/shared/services/book-storage.service";
 import { Component, OnInit } from "@angular/core";
 import { BookAbstract } from "../book-abstract/book.abstract";
 import { Book } from "src/app/shared/model/book.model";
 import { cloneDeep } from "lodash";
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: "app-all-book",
@@ -18,7 +20,10 @@ export class AllBookComponent extends BookAbstract implements OnInit {
   currentPage: number;
   numberOfPage = 3;
 
-  constructor(public bookStorageService: BookStorageService) {
+  constructor(
+    public bookStorageService: BookStorageService,
+    public dialog: MatDialog
+  ) {
     super(bookStorageService);
   }
   ngOnInit() {
@@ -76,5 +81,19 @@ export class AllBookComponent extends BookAbstract implements OnInit {
       return;
     }
     this.onSelectPage(this.currentPage - 1);
+  }
+
+  deleteBook(id: number) {
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent) ;
+    dialogRef.afterClosed().subscribe((response: boolean) => {
+      console.log(response);
+      
+      if(response){
+        this.bookStorageService.deleteBookById(id).subscribe();
+        const index = this.books.findIndex(book => book.id === id);
+        this.books.splice(index,1);
+      }
+    })
+    
   }
 }

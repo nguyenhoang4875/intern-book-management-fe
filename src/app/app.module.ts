@@ -1,3 +1,4 @@
+import { UserModule } from './modules/user/user.module';
 import { AllBookModule } from "./modules/all-book/all-book.module";
 import { MyBookModule } from "./modules/my-book/my-book.module";
 import { LoginModule } from "./shared/modules/login/login.module";
@@ -23,6 +24,7 @@ import { LogoutComponent } from "./core/components/layouts/logout/logout.compone
     LoginModule,
     MyBookModule,
     AllBookModule,
+    UserModule
   ],
   providers: [
     {

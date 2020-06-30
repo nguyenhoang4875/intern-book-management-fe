@@ -7,6 +7,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material';
 
 const components = [
   BookItemComponent,
@@ -19,13 +21,16 @@ const modules = [
   FormsModule,
   ReactiveFormsModule,
   MaterialModule,
-  RouterModule
+  RouterModule,
+  MatDialogModule
 ];
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
+    ConfirmationDialogComponent
   ],
+  entryComponents:[ConfirmationDialogComponent],
   imports: [
     CommonModule,
     ...modules

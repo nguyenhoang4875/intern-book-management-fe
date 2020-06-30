@@ -1,0 +1,173 @@
+<ng-template appPlaceholder></ng-template>
+
+<div class="row h-100 justify-content-center align-items-center">
+  <div class="col-xs-12 col-md-9 col-lg-6 col-xl-6 form-container">
+    <form #form="ngForm" (ngSubmit)="onSaveUser()">
+      <div class="row">
+        <div class="col-12">
+          <h3 style="text-align: center;">
+            {{ editMode ? "Edit " : "New " }} User 
+          </h3>
+          <div class="form-group" *ngIf="editMode">
+            <label for="id">ID</label>
+            <input
+              class="form-control"
+              id="id"
+              type="text"
+              name="id"
+              [(ngModel)]="userDetail.id"
+              readonly
+              ngModel
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input
+              class="form-control"
+              type="text"
+              name="username"
+              #username="ngModel"
+              [(ngModel)]="userDetail.username"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="username.touched && username.errors?.required"
+            >
+              User Name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!editMode">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              class="form-control"
+              type="password"
+              id="password"
+              name="password"
+              #password="ngModel"
+              minlength="6"
+              [(ngModel)]="userDetail.password"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="password.touched && password.errors?.required"
+            >
+              Password is required!
+            </p>
+
+            <p
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="password.touched && password.errors?.minlength"
+            >
+              Password must be at least 6 characters long!!!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="firstName"
+              name="firstName"
+              #firstName="ngModel"
+              [(ngModel)]="userDetail.firstName"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="firstName.touched && fistName.errors?.required"
+            >
+              Fist name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="lastName"
+              name="lastName"
+              #lastName="ngModel"
+              [(ngModel)]="userDetail.lastName"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="lastName.touched && lastName.errors?.required"
+            >
+              Last name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              class="form-control"
+              type="text"
+              id="email"
+              name="email"
+              #email="ngModel"
+              [(ngModel)]="userDetail.email"
+              ngModel
+              required
+              email
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="!email.valid && email.touched && email.errors"
+            >
+              Email is invalid!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="row justify-content-end mr-2">
+            <button class="btn-new" type="submit" [disabled]="!form.valid">
+              {{ editMode ? "Save" : "Submit" }}
+            </button>
+            <button
+              class="btn btn-danger btn-cancel ml-3"
+              type="button"
+              (click)="onCancel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
