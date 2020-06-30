@@ -1,3 +1,4 @@
+import { IRole } from "./../model/user.model";
 import { LocalStorageEnum } from "./../enums/local-storage.enum";
 import { Observable, BehaviorSubject } from "rxjs";
 import { environment } from "../../../environments/environment.prod";
@@ -21,7 +22,11 @@ export class AuthenticationService {
       .post<any>(this.url + "login", { username, password })
       .pipe(
         map((userData) => {
-          const newUser = new User(userData.username, userData.token, userData.roles);
+          const newUser = new User(
+            userData.username,
+            userData.token,
+            userData.roles
+          );
           localStorage.setItem(LocalStorageEnum.USER, JSON.stringify(newUser));
           this.currentUser.next(newUser);
           return userData;
@@ -38,9 +43,23 @@ export class AuthenticationService {
     return null;
   }
 
-  logout() {
+  public logout(): void {
     this.currentUser.next(null);
     localStorage.clear();
     this.router.navigate(["/logout"]);
+  }
+
+  public isAdminRole(): boolean {
+    const user = this.getUserFromLocalStorage();
+    let isValid = false;
+    if (user != null) {
+      user.roles.forEach((role: IRole) => {
+        if (role.name.localeCompare("ROLE_ADMIN") == 0) {
+          isValid = true;
+          return;
+        }
+      });
+    }
+    return isValid;
   }
 }

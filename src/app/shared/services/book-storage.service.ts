@@ -10,6 +10,7 @@ export class BookStorageService extends BaseApiService {
   private readonly enabledEP = "/enabled";
   private readonly myBooksEP = "/mybooks";
   private readonly imagesEP = "images";
+  private readonly updateStatusEP = "/update-status";
 
   public baseEndPoint = "books";
 
@@ -44,6 +45,13 @@ export class BookStorageService extends BaseApiService {
   public postFile(fileToUpload: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append("file", fileToUpload, fileToUpload.name);
-    return this.http.post(this.environmentUrl+this.imagesEP, formData);
+    return this.http.post(this.environmentUrl + this.imagesEP, formData);
+  }
+
+  public changeBookStatus(id: number): Observable<boolean> {
+    return this.http.put<boolean>(
+      this.environmentUrl + this.baseEndPoint + this.updateStatusEP + "/" + id,
+      null
+    );
   }
 }

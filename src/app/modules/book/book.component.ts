@@ -8,9 +8,13 @@ import { BookAbstract } from "../book-abstract/book.abstract";
   templateUrl: "./book.component.html",
   styleUrls: ["./book.component.scss"],
 })
-export class BookComponent extends BookAbstract {
+export class BookComponent extends BookAbstract implements OnInit {
   constructor(bookStorageService: BookStorageService) {
     super(bookStorageService);
+  }
+
+  ngOnInit() {
+    this.getBooks();
   }
 
   getBooks() {

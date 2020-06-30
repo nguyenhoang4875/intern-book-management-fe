@@ -48,8 +48,11 @@
                   <span
                     style="cursor: pointer;"
                     [class]="
-                      book.enabled ? 'badge badge-success' : 'badge badge-danger'
+                      book.enabled
+                        ? 'badge badge-success'
+                        : 'badge badge-danger'
                     "
+                    (click)="changeStatus(book.id)"
                     >{{ book.enabled ? "Enabled" : "Disabled" }}</span
                   >
                 </td>
