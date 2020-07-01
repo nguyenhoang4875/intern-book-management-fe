@@ -1,3 +1,5 @@
+import { HttpParams } from '@angular/common/http';
+import { BookPage } from 'src/app/shared/model/book-page.model';
 import { Injectable } from "@angular/core";
 import { BaseApiService } from "../../core/services/base-api.service";
 import { Observable } from "rxjs";
@@ -28,6 +30,11 @@ export class BookStorageService extends BaseApiService {
 
   public fetchAllBooks(): Observable<Book[]> {
     return this.getElements("");
+  }
+
+  public fetchAllPageBooks(page: number,size:number): Observable<BookPage> {
+    var params = new HttpParams().set("page",page+"").set("size", size+"");
+    return this.getElements("",{params});
   }
 
   public getBookById(id: number): Observable<Book> {

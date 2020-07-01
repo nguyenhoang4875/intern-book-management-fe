@@ -17,3 +17,14 @@ $fa-font-path: "~font-awesome/fonts";
 .badge-danger {
   background-color: #dc3545;
 }
+
+.page-item a.active {
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+
+.disabled {
+  pointer-events: none;
+  color: gray;
+}
