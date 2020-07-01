@@ -17,6 +17,9 @@ export class BookEditComponent implements OnInit {
   private book: Book;
   private fileToUpload: File = null;
   private readonly environmentUrl = environment.baseUrl;
+  private imagePath;
+  private imgURL: any;
+  private message: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,17 +38,25 @@ export class BookEditComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (this.editMode) {
-      this.bookStorageService
-        .updateBook(this.id, this.bookForm.value)
-        .subscribe((book: Book) => (this.book = book));
-    } else {
-      this.bookStorageService
-        .addBook(this.bookForm.value)
-        .subscribe((response: Book) => {
-          console.log(response);
+    this.bookStorageService
+      .postFile(this.fileToUpload)
+      .subscribe((response) => {
+        console.log(response);
+        this.bookForm.patchValue({
+          image: this.environmentUrl + "images/" + response.fileName,
         });
-    }
+        if (this.editMode) {
+          this.bookStorageService
+            .updateBook(this.id, this.bookForm.value)
+            .subscribe((book: Book) => (this.book = book));
+        } else {
+          this.bookStorageService
+            .addBook(this.bookForm.value)
+            .subscribe((response: Book) => {
+              console.log(response);
+            });
+        }
+      });
     this.onCancel();
   }
 
@@ -72,7 +83,7 @@ export class BookEditComponent implements OnInit {
   private initForm(): void {
     this.bookForm = this.formBuilder.group({
       title: [null, Validators.required],
-      image: [null, Validators.required],
+      image: [null],
       description: [null, Validators.required],
       author: [null, Validators.required],
     });
@@ -82,20 +93,6 @@ export class BookEditComponent implements OnInit {
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload);
   }
-  public onSaveImage(): void {
-    this.bookStorageService
-      .postFile(this.fileToUpload)
-      .subscribe((response) => {
-        console.log(response);
-        this.bookForm.patchValue({
-          image: this.environmentUrl + "images/" + response.fileName,
-        });
-      });
-  }
-
-  public imagePath;
-  imgURL: any;
-  public message: string;
 
   preview(files) {
     if (files.length === 0) {
