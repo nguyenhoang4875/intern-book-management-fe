@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-12">
           <h3 style="text-align: center;">
-            {{ editMode ? "Edit " : "New " }} User 
+            {{ editMode ? "Edit " : "New " }} User
           </h3>
           <div class="form-group" *ngIf="editMode">
             <label for="id">ID</label>
@@ -31,9 +31,9 @@
               class="form-control"
               type="text"
               name="username"
+              id="username"
               #username="ngModel"
               [(ngModel)]="userDetail.username"
-              ngModel
               required
             />
             <p
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="!editMode">
+      <div class="row" *ngIf="editMode != true">
         <div class="col-12">
           <div class="form-group">
             <label for="password">Password</label>
@@ -155,7 +155,11 @@
       <div class="row">
         <div class="col-12">
           <div class="row justify-content-end mr-2">
-            <button class="btn-new" type="submit" [disabled]="!form.valid">
+            <button
+              class="btn btn-success"
+              type="submit"
+              [disabled]="!form.valid"
+            >
               {{ editMode ? "Save" : "Submit" }}
             </button>
             <button

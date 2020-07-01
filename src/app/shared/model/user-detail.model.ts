@@ -1,6 +1,7 @@
 export class UserDetail {
-  id: string;
+  id: number;
   username: string;
+  password: string;
   firstName: string;
   lastName: string;
   enabled: string;

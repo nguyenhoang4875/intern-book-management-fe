@@ -23,21 +23,24 @@ export class UserEditComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params["id"];
       this.editMode = params["id"] != null;
-      console.log("id: " + this.id);
-      console.log("-----------------------------");
-
       this.userStorageService
         .getElementById(this.id)
         .subscribe((user: UserDetail) => {
           this.userDetail = user;
-          console.log("-----------------------------");
-          console.log(this.userDetail);
         });
     });
   }
+  
   onSaveUser() {
-    console.log("***********************");
-    console.log(this.userDetail);
-    
+    this.userStorageService
+      .updateUser(this.userDetail.id, this.userDetail)
+      .subscribe((response: UserDetail) => {
+        this.userDetail = response;
+        this.router.navigate(["../../"],{relativeTo: this.route})
+      });
+  }
+
+  onCancel() {
+    this.router.navigate(["../../"], { relativeTo: this.route });
   }
 }
