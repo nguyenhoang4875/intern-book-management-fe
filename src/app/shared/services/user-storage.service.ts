@@ -9,11 +9,12 @@ import { UserDetail } from "../model/user-detail.model";
 export class UserStorageService extends BaseApiService {
   private readonly imagesEP = "images";
   private readonly allUsersEP = "all";
+  private readonly registerEP = "register";
 
   public baseEndPoint = "users";
 
   public addUser(userDetail: UserDetail): Observable<UserDetail> {
-    return this.createElement("", userDetail);
+    return this.http.post<UserDetail>(this.environmentUrl+"register",userDetail);
   }
 
   public fetchUsers(): Observable<UserDetail[]> {

@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css" />
 
 <div class="container" *ngIf="!isLoading">
-  <div class="container-fluid" [style.margin-top.px]="30">
-    <div class="top-main">
+  <div class="container-fluid">
+    <div class="mt-2 mb-2">
       <button
         class="btn btn-success"
         [routerLink]="['/users/new']"
@@ -51,17 +51,13 @@
                     >{{ user.enabled ? "Enabled" : "Disabled" }}</span
                   >
                 </td>
-                <td style="text-align: center; width: 135px;">
+                <td class="ml-5">
                   <i
-                    class="far fa-eye idetail mr-2"
-                    [routerLink]="[user.id]"
-                  ></i>
-                  <i
-                    class="far fa-edit iedit mr-2"
+                    class="far fa-edit iedit mr-2 edit-icon"
                     [routerLink]="[user.id, 'edit']"
                   ></i>
                   <i
-                    class="far fa-trash-alt idelete"
+                    class="far fa-trash-alt idelete delete-icon"
                     (click)="deleteUse(user.id)"
                   ></i>
                 </td>

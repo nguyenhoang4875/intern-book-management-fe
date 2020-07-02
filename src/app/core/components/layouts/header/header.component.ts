@@ -9,10 +9,11 @@ import { User } from "src/app/shared/model/user.model";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  private isLogin: boolean;
-  private isAdmin: boolean;
+  public isLogin: boolean;
+  public isAdmin: boolean;
   public currentUser: User;
   public router: Router;
+  public isCollapsed = false;
   constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
@@ -23,5 +24,6 @@ export class HeaderComponent implements OnInit {
     if (!user) {
       this.authenticationService.logout();
     }
+    this.isAdmin = this.authenticationService.isAdminRole();
   }
 }
