@@ -32,11 +32,23 @@
 }
 .comment-user {
     color:    #285b9e;
+    margin-left: 5px;
+    margin-bottom: 0px;
 }
 
 .comment-date {
     color: #797777;
     font-size: small;
     font-style: italic;
+    margin: 0px;
 }
 
+.image-user-list{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.comment-message {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}

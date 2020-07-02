@@ -7,7 +7,6 @@ export class UserDetail {
   enabled: string;
   email: string;
   avatar: string;
-  
   constructor(init?: Partial<UserDetail>) {
     Object.assign(this, init);
   }

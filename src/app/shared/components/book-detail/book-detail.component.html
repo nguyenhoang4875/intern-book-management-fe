@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="container"> 
+  <div class="container">
     <div class="comment-form">
       <input
         type="text"
@@ -36,10 +36,13 @@
       <div *ngFor="let comment of comments; let i = index">
         <div class="list-group-item comment-detail">
           <div class="container row">
-            <p class="mr-3 comment-user">{{ comment.username }}</p>
-            <p class="comment-message">{{ comment.message }}</p>
+            <img class="image-user-list mr-2" src="{{ comment.avatarUrl }}" />
+            <div>
+            <p class="comment-user">{{ comment.username }}</p>
+            <p class="comment-date">{{ comment.createdAt | dateAgo }}</p>
+            </div>
           </div>
-          <p class="comment-date">{{ comment.createdAt | date: "medium" }}</p>
+          <p class="comment-message">{{ comment.message }}</p>
         </div>
       </div>
     </div>

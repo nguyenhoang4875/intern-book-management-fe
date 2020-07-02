@@ -10,6 +10,7 @@ import { MaterialModule } from "../material.module";
 import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
 import { MatDialogModule } from "@angular/material";
 import { DropdownDirective } from "./dropdown.directive";
+import { DateAgoPipe } from "./pipes/date-ago.pipe";
 
 const components = [
   BookItemComponent,
@@ -18,6 +19,7 @@ const components = [
   SearchComponent,
   DropdownDirective,
   ConfirmationDialogComponent,
+  DateAgoPipe,
 ];
 
 const modules = [

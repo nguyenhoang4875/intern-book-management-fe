@@ -4,6 +4,7 @@ export class Comment {
   public createdAt: Date;
   public updatedAt: Date;
   public username: string;
+  public avatarUrl: string;
 
   constructor(message: string) {
     this.message = message;
