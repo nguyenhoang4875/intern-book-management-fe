@@ -1,12 +1,10 @@
-<ng-template appPlaceholder></ng-template>
-
 <div class="row h-100 justify-content-center align-items-center">
   <div class="col-xs-12 col-md-9 col-lg-6 col-xl-6 form-container">
     <form #form="ngForm" (ngSubmit)="onSaveUser()">
       <div class="row">
         <div class="col-12">
           <h3 style="text-align: center;">
-            {{ editMode ? "Edit " : "New " }} User
+            {{ editMode == true ? "Edit " : "New " }} User
           </h3>
           <div class="form-group" *ngIf="editMode">
             <label for="id">ID</label>
@@ -31,8 +29,8 @@
               class="form-control"
               type="text"
               name="username"
-              id="username"
               #username="ngModel"
+              id="username"
               [(ngModel)]="userDetail.username"
               required
             />
@@ -95,7 +93,7 @@
             />
             <p
               class="alert alert-danger"
-              *ngIf="firstName.touched && fistName.errors?.required"
+              *ngIf="firstName.touched && firstName.errors?.required"
             >
               Fist name is required!
             </p>
@@ -160,7 +158,7 @@
               type="submit"
               [disabled]="!form.valid"
             >
-              {{ editMode ? "Save" : "Submit" }}
+              {{ editMode == true ? "Save" : "Submit" }}
             </button>
             <button
               class="btn btn-danger btn-cancel ml-3"

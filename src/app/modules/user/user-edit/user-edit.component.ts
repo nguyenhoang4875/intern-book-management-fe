@@ -9,9 +9,9 @@ import { ActivatedRoute, Router, Params } from "@angular/router";
   styleUrls: ["./user-edit.component.scss"],
 })
 export class UserEditComponent implements OnInit {
-  userDetail: UserDetail;
+  userDetail: UserDetail = new UserDetail();
   id: number;
-  editMode = false;
+  public editMode = false;
 
   constructor(
     private userStorageService: UserStorageService,
@@ -23,21 +23,29 @@ export class UserEditComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params["id"];
       this.editMode = params["id"] != null;
-      this.userStorageService
-        .getElementById(this.id)
-        .subscribe((user: UserDetail) => {
-          this.userDetail = user;
-        });
+      console.log("edit mode: " + this.editMode);
+      if (this.id != null) {
+        this.userStorageService
+          .getElementById(this.id)
+          .subscribe((user: UserDetail) => {
+            this.userDetail = user;
+          });
+      }
     });
   }
-  
+
   onSaveUser() {
-    this.userStorageService
-      .updateUser(this.userDetail.id, this.userDetail)
-      .subscribe((response: UserDetail) => {
-        this.userDetail = response;
-        this.router.navigate(["../../"],{relativeTo: this.route})
-      });
+    if (this.editMode) {
+      this.userStorageService
+        .updateUser(this.userDetail.id, this.userDetail)
+        .subscribe((response: UserDetail) => {
+          this.userDetail = response;
+          this.router.navigate(["../../"], { relativeTo: this.route });
+        });
+    } else {
+      console.log("User detail: " + this.userDetail.username);
+      this.userStorageService.addUser(this.userDetail).subscribe();
+    }
   }
 
   onCancel() {
