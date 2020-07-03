@@ -1,12 +1,12 @@
 <a
   style="cursor: pointer;"
- [routerLink]="[index]" routerLinkActive="router-link-active" 
+  [routerLink]="[index]"
+  routerLinkActive="router-link-active"
   class="list-group-item clearfix item-book"
 >
-  <div>
-    <img class="image-book" src="{{ book.image }}" />
-    <p class="title-book truncate">{{ book.title | uppercase }}</p>
-    <p>Author: {{ book.author }}</p>
-    <p>Username: {{ book.username }}</p>
+  <img class="image-book" src="{{ book.image }}" />
+  <div class="item-book-specific">
+    <p class="title-book truncate">{{ book.title  | titlecase}}</p>
+    <p class="author">Author: {{ book.author | titlecase }}</p>
   </div>
 </a>

@@ -1,7 +1,7 @@
 <div class="container" *ngIf="book">
   <div class="row">
     <div class="col-md-6">
-      <p class="title-book text-center">{{ book.title | uppercase }}</p>
+      <p class="title-book text-center">{{ book.title | titlecase }}</p>
       <img class="image-book-detail" src="{{ book.image }}" />
     </div>
     <div class="col-md-6 info-book-detail">
