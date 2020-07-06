@@ -14,13 +14,11 @@ import { Header } from "src/app/shared/model/header.model";
   styleUrls: ["./all-book.component.scss"],
 })
 export class AllBookComponent extends BookAbstract implements OnInit {
-  showedBooks: Book[] = [];
-  search: string;
-  totalPages: number;
-  totalPagesArr: number[] = [];
-  pages: [];
-  currentPage: number;
-  query: string;
+  public search: string;
+  public totalPages: number;
+  public totalPagesArr: number[] = [];
+  public pages: [];
+  public currentPage: number;
   public sizeOptions = [1, 3, 5, 10, 20, 50];
   public size = 3;
   public headers: Header[] = [];
@@ -95,6 +93,7 @@ export class AllBookComponent extends BookAbstract implements OnInit {
 
   getData() {
     this.currentPage = 0;
+    this.totalPagesArr = [];
     this.bookStorageService
       .fetchAllPageBooksSort(this.currentPage, this.size, "id,asc")
       .subscribe((response) => {
@@ -110,16 +109,24 @@ export class AllBookComponent extends BookAbstract implements OnInit {
   protected getBooks() {}
 
   protected getBookPage(page: number, size: number) {
-    this.bookStorageService
-      .fetchAllPageBooksSort(
+    var getBook$ = this.bookStorageService.fetchAllPageBooksSort(
+      page,
+      size,
+      this.headerSort.key + "," + this.headerSort.sortedBy
+    );
+    if (this.search != undefined && this.search != null) {
+      this.search = this.search.trim();
+      getBook$ = this.bookStorageService.fetchAllPageBooksSearch(
+        this.search,
         page,
-        size,
-        this.headerSort.key + "," + this.headerSort.sortedBy
-      )
-      .subscribe((response) => {
-        this.bookPage = response;
-        this.books = this.bookPage.content;
-      });
+        size
+      );
+    }
+
+    getBook$.subscribe((response) => {
+      this.bookPage = response;
+      this.books = this.bookPage.content;
+    });
   }
 
   public changeStatus(id: number) {
@@ -174,6 +181,9 @@ export class AllBookComponent extends BookAbstract implements OnInit {
   public selectedSizeOfPage(): void {
     this.totalPagesArr = [];
     this.getData();
+    if (this.search != undefined && this.search != null && this.search != "") {
+      this.onSearch();
+    }
   }
 
   public sortBy(header: Header): void {
@@ -189,6 +199,22 @@ export class AllBookComponent extends BookAbstract implements OnInit {
         header.key + "," + header.sortedBy
       )
       .subscribe((response) => {
+        this.bookPage = response;
+        this.books = this.bookPage.content;
+        this.totalPages = response.totalPages;
+        for (let i = 0; i < response.totalPages; i++) {
+          this.totalPagesArr.push(i);
+        }
+      });
+  }
+
+  onSearch() {
+    this.currentPage = 0;
+    this.totalPagesArr = [];
+    this.bookStorageService
+      .fetchAllPageBooksSearch(this.search.trim(), this.currentPage, this.size)
+      .subscribe((response: BookPage) => {
+        this.bookPage = response;
         this.bookPage = response;
         this.books = this.bookPage.content;
         this.totalPages = response.totalPages;

@@ -3,10 +3,21 @@
 <div class="container" *ngIf="!isLoading">
   <div class="container-fluid" [style.margin-top.px]="30">
     <div class="top-main">
-      <app-search
-        [books]="originBooks"
-        (searchEmitter)="onSearch($event)"
-      ></app-search>
+      <form
+        class="form-inline d-flex justify-content-center md-form form-sm active-pink-2 mt-2"
+      >
+        <input
+          class="form-control form-control-sm w-25"
+          type="text"
+          name="search"
+          [(ngModel)]="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-light" (click)="onSearch()">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
       <button
         class="btn btn-success"
         [routerLink]="['/new']"

@@ -11,6 +11,7 @@ import { Book } from "../model/book.model";
 export class BookStorageService extends BaseApiService {
   private readonly enabledEP = "/enabled";
   private readonly myBooksEP = "/mybooks";
+  private readonly searchEP = "/search";
   private readonly imagesEP = "images";
   private readonly updateStatusEP = "/update-status";
 
@@ -44,6 +45,21 @@ export class BookStorageService extends BaseApiService {
       params = params.append("sort", sort);
     }
     return this.getElements("", { params });
+  }
+  public fetchAllPageBooksSearch(
+    keyword: string,
+    page: number,
+    size: number,
+    sort?: string
+  ): Observable<BookPage> {
+    var params = new HttpParams();
+    params = params.append("page", page.toString());
+    params = params.append("size", size.toString());
+    params = params.append("keyword",keyword);
+    if (sort != undefined && sort != "" && sort != null) {
+      params = params.append("sort", sort);
+    }
+    return this.getElements(this.searchEP, { params });
   }
 
   public getBookById(id: number): Observable<Book> {
