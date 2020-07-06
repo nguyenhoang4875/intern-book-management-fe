@@ -10,15 +10,15 @@ const routes: Routes = [
     component: AllBookComponent,
   },
   {
-    path: "new",
+    path: "all-books/new",
     component: BookEditComponent,
   },
   {
-    path: ":id",
+    path: "all-books/:id",
     component: BookDetailComponent,
   },
   {
-    path: ":id/edit",
+    path: "all-books/:id/edit",
     component: BookEditComponent,
   },
 ];

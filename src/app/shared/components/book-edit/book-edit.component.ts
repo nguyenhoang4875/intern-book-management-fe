@@ -38,26 +38,45 @@ export class BookEditComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.bookStorageService
-      .postFile(this.fileToUpload)
-      .subscribe((response) => {
-        console.log(response);
-        this.bookForm.patchValue({
-          image: this.environmentUrl + "images/" + response.fileName,
-        });
-        if (this.editMode) {
-          this.bookStorageService
-            .updateBook(this.id, this.bookForm.value)
-            .subscribe((book: Book) => (this.book = book));
-        } else {
-          this.bookStorageService
-            .addBook(this.bookForm.value)
-            .subscribe((response: Book) => {
-              console.log(response);
+    if (this.editMode) {
+      var updateBook$ = this.bookStorageService.updateBook(
+        this.id,
+        this.bookForm.value
+      );
+      if (this.fileToUpload != null && this.fileToUpload != undefined) {
+        this.bookStorageService
+          .postFile(this.fileToUpload)
+          .subscribe((response) => {
+            this.bookForm.patchValue({
+              image: this.environmentUrl + "images/" + response.fileName,
             });
-        }
-      });
-    this.onCancel();
+            updateBook$.subscribe((book: Book) => (this.book = book));
+          });
+      } else {
+        updateBook$.subscribe((book: Book) => (this.book = book));
+      }
+      this.router.navigate(["../../"], { relativeTo: this.route });
+    } else {
+      var addBook$ = this.bookStorageService.addBook(this.bookForm.value);
+      if (this.fileToUpload != null && this.fileToUpload != undefined) {
+        this.bookStorageService
+          .postFile(this.fileToUpload)
+          .subscribe((response) => {
+            console.log(response);
+            this.bookForm.patchValue({
+              image: this.environmentUrl + "images/" + response.fileName,
+            });
+              addBook$.subscribe((response: Book) => {
+                console.log(response);
+              });
+          });
+      } else {
+          addBook$.subscribe((response: Book) => {
+            console.log(response);
+          });
+      }
+      this.onCancel();
+    }
   }
 
   public onCancel(): void {

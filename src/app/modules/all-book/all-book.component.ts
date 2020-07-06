@@ -167,10 +167,8 @@ export class AllBookComponent extends BookAbstract implements OnInit {
 
   deleteBook(id: number) {
     let dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    dialogRef.afterClosed().subscribe((response: boolean) => {
-      console.log(response);
-
-      if (response == true) {
+    dialogRef.afterClosed().subscribe((response: string) => {
+      if (response == "true") {
         this.bookStorageService.deleteBookById(id).subscribe();
         const index = this.books.findIndex((book) => book.id === id);
         this.books.splice(index, 1);
