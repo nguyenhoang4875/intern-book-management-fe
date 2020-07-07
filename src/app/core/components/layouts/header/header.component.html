@@ -24,20 +24,19 @@
           >My Books <span class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item" appDropdown *ngIf="isAdmin">
-        <a
-        class="nav-link dropdown-toggle"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed"
-          >Manages</a
-        >
-        <div *ngIf="isCollapsed" class="dropdown-content">
-          <a [routerLink]="['/all-books']" routerLinkActive="router-link-active"
-            >Books</a
-          >
-          <a [routerLink]="['/users']" routerLinkActive="router-link-active"
-            >Users</a
-          >
+      <li>
+        <div class="dropdown">
+          <a class="nav-link">Manages</a>
+          <div class="dropdown-content">
+            <a
+              [routerLink]="['/all-books']"
+              routerLinkActive="router-link-active"
+              >Books</a
+            >
+            <a [routerLink]="['/users']" routerLinkActive="router-link-active"
+              >Users</a
+            >
+          </div>
         </div>
       </li>
     </ul>
