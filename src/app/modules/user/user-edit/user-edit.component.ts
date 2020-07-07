@@ -44,24 +44,26 @@ export class UserEditComponent implements OnInit {
 
   onSaveUser() {
     if (this.editMode) {
-      var updateUser$ = this.userStorageService.updateUser(
-        this.userDetail.id,
-        this.userDetail
-      );
       if (this.fileToUpload != null && this.fileToUpload != undefined) {
         this.userStorageService
           .postFile(this.fileToUpload)
           .subscribe((response) => {
             this.userDetail.avatar =
               this.environmentUrl + "images/" + response.fileName;
-            updateUser$.subscribe((response: UserDetail) => {
+              this.userStorageService.updateUser(
+                this.userDetail.id,
+                this.userDetail
+              ).subscribe((response: UserDetail) => {
               console.log(response.avatar);
               this.userDetail = response;
               this.router.navigate(["../../"], { relativeTo: this.route });
             });
           });
       } else {
-        updateUser$.subscribe((response: UserDetail) => {
+        this.userStorageService.updateUser(
+          this.userDetail.id,
+          this.userDetail
+        ).subscribe((response: UserDetail) => {
           console.log(response.avatar);
           this.userDetail = response;
           this.router.navigate(["../../"], { relativeTo: this.route });
