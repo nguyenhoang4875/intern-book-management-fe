@@ -50,6 +50,9 @@ export class BookEditComponent implements OnInit {
             this.bookForm.patchValue({
               image: this.environmentUrl + "images/" + response.fileName,
             });
+            console.log("image: ");
+            
+            console.log(this.book.image);
             updateBook$.subscribe((book: Book) => (this.book = book));
           });
       } else {

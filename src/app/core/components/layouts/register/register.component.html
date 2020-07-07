@@ -1,0 +1,155 @@
+<div class="row h-100 justify-content-center align-items-center">
+  <div class="col-xs-12 col-md-9 col-lg-6 col-xl-6 form-container">
+    <h2 class="text-center">Register form</h2>
+    <form #form="ngForm" (ngSubmit)="onSaveUser()">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input
+              class="form-control"
+              type="text"
+              name="username"
+              #username="ngModel"
+              id="username"
+              [(ngModel)]="userDetail.username"
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="username.touched && username.errors?.required"
+            >
+              User Name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              class="form-control"
+              type="password"
+              id="password"
+              name="password"
+              #password="ngModel"
+              minlength="6"
+              [(ngModel)]="userDetail.password"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="password.touched && password.errors?.required"
+            >
+              Password is required!
+            </p>
+
+            <p
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="password.touched && password.errors?.minlength"
+            >
+              Password must be at least 6 characters long!!!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="firstName"
+              name="firstName"
+              #firstName="ngModel"
+              [(ngModel)]="userDetail.firstName"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="firstName.touched && firstName.errors?.required"
+            >
+              Fist name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input
+              class="form-control"
+              type="text"
+              id="lastName"
+              name="lastName"
+              #lastName="ngModel"
+              [(ngModel)]="userDetail.lastName"
+              ngModel
+              required
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="lastName.touched && lastName.errors?.required"
+            >
+              Last name is required!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              class="form-control"
+              type="text"
+              id="email"
+              name="email"
+              #email="ngModel"
+              [(ngModel)]="userDetail.email"
+              ngModel
+              required
+              email
+            />
+            <p
+              class="alert alert-danger"
+              *ngIf="!email.valid && email.touched && email.errors"
+            >
+              Email is invalid!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row justify-content-end mr-2">
+            <button
+              class="btn btn-success"
+              type="submit"
+              [disabled]="!form.valid"
+            >
+              Save
+            </button>
+            <button
+              class="btn btn-danger btn-cancel ml-3"
+              type="button"
+              (click)="onCancel()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

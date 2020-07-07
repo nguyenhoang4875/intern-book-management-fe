@@ -13,8 +13,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BasicAuthHttpInterceptorService } from "./shared/services/basic-auth-interceptor.service";
 import { HeaderComponent } from "./core/components/layouts/header/header.component";
 import { LogoutComponent } from "./core/components/layouts/logout/logout.component";
+import { RegisterComponent } from './core/components/layouts/register/register.component';
 @NgModule({
-  declarations: [AppComponent, LogoutComponent, HeaderComponent],
+  declarations: [AppComponent, LogoutComponent, HeaderComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

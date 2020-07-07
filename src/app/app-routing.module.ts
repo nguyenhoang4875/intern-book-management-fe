@@ -1,3 +1,4 @@
+import { RegisterComponent } from "./core/components/layouts/register/register.component";
 import { AdminGuardService } from "./shared/services/admin-guard.service";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
@@ -15,6 +16,10 @@ const routes: Routes = [
     path: "logout",
     component: LogoutComponent,
     canActivate: [AuthGuardService],
+  },
+  {
+    path: "register",
+    component: RegisterComponent,
   },
   {
     path: "books",
