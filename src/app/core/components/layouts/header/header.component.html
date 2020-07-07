@@ -43,19 +43,19 @@
   </div>
 
   <ul class="nav navbar-nav navbar-right">
-    <div class="nav-item" *ngIf="currentUser; else login">
-      <a
-        class="nav-link"
-        [routerLink]="['/logout']"
-        routerLinkActive="router-link-active"
-        >Logout</a
+    <div class="dropdown" *ngIf="currentUser; else login" style="padding-right: 40px;">
+      <a class="nav-link">
+        <img class="image-user-list" src="{{ userDetail.avatar }}" /> 
+      </a
       >
-      <a
-        class="nav-link"
-        [routerLink]="['/profile']"
-        routerLinkActive="router-link-active"
-        >profile</a
-      >
+      <div class="dropdown-content">
+        <a [routerLink]="['/profile']" routerLinkActive="router-link-active"
+          >My Profile
+        </a>
+        <a [routerLink]="['/logout']" routerLinkActive="router-link-active"
+          >Logout</a
+        >
+      </div>
     </div>
     <ng-template #login>
       <a
@@ -65,7 +65,7 @@
       >
         Login
       </a>
-      
+
       <a
         class="nav-link"
         [routerLink]="['/register']"
