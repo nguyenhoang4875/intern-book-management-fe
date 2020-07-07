@@ -7,8 +7,10 @@
     <div class="col-md-6 info-book-detail">
       <p>Author: {{ book.author }}</p>
       <p>Description: {{ book.description }}</p>
-      <p>Created at: {{ book.createdAt | date: medium }}</p>
+      <p *ngIf="!book.updatedAt; else update">Created at: {{ book.createdAt | date: medium }}</p>
+      <ng-template #update >
       <p>Updated at: {{ book.updatedAt | date: medium }}</p>
+      </ng-template>
       <p>Created by: {{ book.username }}</p>
       <div *ngIf="isLogin">
         <button class="btn btn-primary mr-2" (click)="onEditBook()">
