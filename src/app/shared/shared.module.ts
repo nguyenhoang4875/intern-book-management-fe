@@ -11,6 +11,7 @@ import { ConfirmationDialogComponent } from "./components/confirmation-dialog/co
 import { MatDialogModule } from "@angular/material";
 import { DropdownDirective } from "./dropdown.directive";
 import { DateAgoPipe } from "./pipes/date-ago.pipe";
+import { CKEditorModule } from 'ckeditor4-angular';
 
 const components = [
   BookItemComponent,
@@ -28,6 +29,7 @@ const modules = [
   MaterialModule,
   RouterModule,
   MatDialogModule,
+  CKEditorModule
 ];
 
 @NgModule({
