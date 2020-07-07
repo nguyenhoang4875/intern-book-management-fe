@@ -1,3 +1,4 @@
+import { AdminGuardService } from './../../shared/services/admin-guard.service';
 import { UserEditComponent } from "./user-edit/user-edit.component";
 import { UserComponent } from "./user.component";
 import { NgModule } from "@angular/core";
@@ -7,6 +8,7 @@ const routes: Routes = [
   {
     path: "",
     component: UserComponent,
+    canActivate:[AdminGuardService]
   },
   {
     path: ":id/edit",
@@ -14,7 +16,8 @@ const routes: Routes = [
   },
   {
     path: "new",
-    component: UserEditComponent
+    component: UserEditComponent,
+    canActivate:[AdminGuardService]
   },
 ];
 @NgModule({

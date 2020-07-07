@@ -1,3 +1,4 @@
+import { UserDetailComponent } from "./modules/user/user-detail/user-detail.component";
 import { RegisterComponent } from "./core/components/layouts/register/register.component";
 import { AdminGuardService } from "./shared/services/admin-guard.service";
 import { NgModule } from "@angular/core";
@@ -22,6 +23,10 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
+    path: "profile",
+    component: UserDetailComponent,
+  },
+  {
     path: "books",
     loadChildren: () =>
       import("./modules/book/book.module").then((m) => m.BookModule),
@@ -42,7 +47,6 @@ const routes: Routes = [
     path: "users",
     loadChildren: () =>
       import("./modules/user/user.module").then((m) => m.UserModule),
-    canActivate: [AdminGuardService],
   },
 ];
 

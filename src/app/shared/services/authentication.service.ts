@@ -23,6 +23,7 @@ export class AuthenticationService {
       .pipe(
         map((userData) => {
           const newUser = new User(
+            userData.id,
             userData.username,
             userData.token,
             userData.roles

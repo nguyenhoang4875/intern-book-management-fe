@@ -26,4 +26,6 @@ export class HeaderComponent implements OnInit {
     }
     this.isAdmin = this.authenticationService.isAdminRole();
   }
+
+  
 }
