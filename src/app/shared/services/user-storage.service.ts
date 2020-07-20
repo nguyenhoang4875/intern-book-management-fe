@@ -1,24 +1,27 @@
-import { Injectable } from "@angular/core";
-import { BaseApiService } from "../../core/services/base-api.service";
-import { Observable } from "rxjs";
-import { UserDetail } from "../model/user-detail.model";
+import { Injectable } from '@angular/core';
+import { BaseApiService } from '../../core/services/base-api.service';
+import { Observable } from 'rxjs';
+import { UserDetail } from '../model/user-detail.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserStorageService extends BaseApiService {
-  private readonly imagesEP = "images";
-  private readonly allUsersEP = "all";
-  private readonly registerEP = "register";
+  private readonly imagesEP = 'images';
+  private readonly allUsersEP = 'all';
+  private readonly registerEP = 'register';
 
-  public baseEndPoint = "users";
+  public baseEndPoint = 'users';
 
   public addUser(userDetail: UserDetail): Observable<UserDetail> {
-    return this.http.post<UserDetail>(this.environmentUrl+"register",userDetail);
+    return this.http.post<UserDetail>(
+      this.environmentUrl + 'register',
+      userDetail
+    );
   }
 
   public fetchUsers(): Observable<UserDetail[]> {
-    return this.getElements("");
+    return this.getElements('');
   }
 
   public fetchAllUsers(): Observable<UserDetail[]> {
@@ -42,7 +45,7 @@ export class UserStorageService extends BaseApiService {
 
   public postFile(fileToUpload: File): Observable<any> {
     const formData: FormData = new FormData();
-    formData.append("file", fileToUpload, fileToUpload.name);
+    formData.append('file', fileToUpload, fileToUpload.name);
     return this.http.post(this.environmentUrl + this.imagesEP, formData);
   }
 }

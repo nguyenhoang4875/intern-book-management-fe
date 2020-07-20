@@ -1,14 +1,14 @@
-import { BookStorageService } from "src/app/shared/services/book-storage.service";
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { ActivatedRoute, Router, Params } from "@angular/router";
-import { Book } from "src/app/shared/model/book.model";
-import { environment } from "src/environments/environment.prod";
+import { BookStorageService } from 'src/app/shared/services/book-storage.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Book } from 'src/app/shared/model/book.model';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
-  selector: "app-book-edit",
-  templateUrl: "./book-edit.component.html",
-  styleUrls: ["./book-edit.component.scss"],
+  selector: 'app-book-edit',
+  templateUrl: './book-edit.component.html',
+  styleUrls: ['./book-edit.component.scss'],
 })
 export class BookEditComponent implements OnInit {
   private id: number;
@@ -31,8 +31,8 @@ export class BookEditComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.route.params.subscribe((params: Params) => {
-      this.id = +params["id"];
-      this.editMode = params["id"] != null;
+      this.id = +params['id'];
+      this.editMode = params['id'] != null;
       this.initData();
     });
   }
@@ -44,7 +44,7 @@ export class BookEditComponent implements OnInit {
           .postFile(this.fileToUpload)
           .subscribe((response) => {
             this.bookForm.patchValue({
-              image: this.environmentUrl + "images/" + response.fileName,
+              image: this.environmentUrl + 'images/' + response.fileName,
             });
             this.bookStorageService
               .updateBook(this.id, this.bookForm.value)
@@ -55,7 +55,7 @@ export class BookEditComponent implements OnInit {
           .updateBook(this.id, this.bookForm.value)
           .subscribe((book: Book) => (this.book = book));
       }
-      this.router.navigate(["../../"], { relativeTo: this.route });
+      this.router.navigate(['../../'], { relativeTo: this.route });
     } else {
       if (this.fileToUpload != null && this.fileToUpload != undefined) {
         this.bookStorageService
@@ -63,7 +63,7 @@ export class BookEditComponent implements OnInit {
           .subscribe((response) => {
             console.log(response);
             this.bookForm.patchValue({
-              image: this.environmentUrl + "images/" + response.fileName,
+              image: this.environmentUrl + 'images/' + response.fileName,
             });
             this.bookStorageService
               .addBook(this.bookForm.value)
@@ -83,7 +83,7 @@ export class BookEditComponent implements OnInit {
   }
 
   public onCancel(): void {
-    this.router.navigate(["../"], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   private initData(): void {
@@ -93,10 +93,10 @@ export class BookEditComponent implements OnInit {
         .subscribe((response: Book) => {
           this.book = response;
           this.bookForm.setValue({
-            title: response.title || "",
-            image: response.image || "",
-            description: response.description || "",
-            author: response.author || "",
+            title: response.title || '',
+            image: response.image || '',
+            description: response.description || '',
+            author: response.author || '',
           });
         });
     }
@@ -123,13 +123,13 @@ export class BookEditComponent implements OnInit {
 
     var mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported.";
+      this.message = 'Only images are supported.';
       return;
     }
 
     var reader = new FileReader();
     this.imagePath = files;
-    console.log("image path:");
+    console.log('image path:');
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imgURL = reader.result;

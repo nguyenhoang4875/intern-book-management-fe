@@ -1,4 +1,4 @@
-import { Book } from "./book.model";
+import { Book } from './book.model';
 
 export class BookPage {
   public content: Book[];
@@ -7,7 +7,7 @@ export class BookPage {
   public size: number;
   public number: number;
   public numberOfElements: number;
-  
+
   constructor(init?: Partial<BookPage>) {
     Object.assign(this, init);
   }

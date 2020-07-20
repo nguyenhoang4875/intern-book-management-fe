@@ -1,15 +1,15 @@
-import { IRole } from "./../model/user.model";
-import { Injectable } from "@angular/core";
+import { IRole } from './../model/user.model';
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-} from "@angular/router";
-import { AuthenticationService } from "./authentication.service";
+} from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AdminGuardService implements CanActivate {
   constructor(
@@ -22,7 +22,7 @@ export class AdminGuardService implements CanActivate {
     let isValid = false;
     if (currentUser) {
       currentUser.roles.forEach((role: IRole) => {
-        if (role.name.localeCompare("ROLE_ADMIN") == 0) {
+        if (role.name.localeCompare('ROLE_ADMIN') == 0) {
           isValid = true;
           return;
         }
@@ -31,7 +31,7 @@ export class AdminGuardService implements CanActivate {
     if (isValid) {
       return true;
     } else {
-      this.router.navigate(["books"]);
+      this.router.navigate(['books']);
       return false;
     }
   }

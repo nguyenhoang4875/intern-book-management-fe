@@ -1,24 +1,24 @@
-import { HttpParams } from "@angular/common/http";
-import { BookPage } from "src/app/shared/model/book-page.model";
-import { Injectable } from "@angular/core";
-import { BaseApiService } from "../../core/services/base-api.service";
-import { Observable } from "rxjs";
-import { Book } from "../model/book.model";
+import { HttpParams } from '@angular/common/http';
+import { BookPage } from 'src/app/shared/model/book-page.model';
+import { Injectable } from '@angular/core';
+import { BaseApiService } from '../../core/services/base-api.service';
+import { Observable } from 'rxjs';
+import { Book } from '../model/book.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class BookStorageService extends BaseApiService {
-  private readonly enabledEP = "/enabled";
-  private readonly myBooksEP = "/mybooks";
-  private readonly searchEP = "/search";
-  private readonly imagesEP = "images";
-  private readonly updateStatusEP = "/update-status";
+  private readonly enabledEP = '/enabled';
+  private readonly myBooksEP = '/mybooks';
+  private readonly searchEP = '/search';
+  private readonly imagesEP = 'images';
+  private readonly updateStatusEP = '/update-status';
 
-  public baseEndPoint = "books";
+  public baseEndPoint = 'books';
 
   public addBook(book: Book): Observable<Book> {
-    return this.createElement("", book);
+    return this.createElement('', book);
   }
 
   public fetchBooks(): Observable<Book[]> {
@@ -30,7 +30,7 @@ export class BookStorageService extends BaseApiService {
   }
 
   public fetchAllBooks(): Observable<Book[]> {
-    return this.getElements("");
+    return this.getElements('');
   }
 
   public fetchAllPageBooksSort(
@@ -39,12 +39,12 @@ export class BookStorageService extends BaseApiService {
     sort?: string
   ): Observable<BookPage> {
     var params = new HttpParams();
-    params = params.append("page", page.toString());
-    params = params.append("size", size.toString());
-    if (sort != undefined && sort != "" && sort != null) {
-      params = params.append("sort", sort);
+    params = params.append('page', page.toString());
+    params = params.append('size', size.toString());
+    if (sort != undefined && sort != '' && sort != null) {
+      params = params.append('sort', sort);
     }
-    return this.getElements("", { params });
+    return this.getElements('', { params });
   }
   public fetchAllPageBooksSearch(
     keyword: string,
@@ -53,11 +53,11 @@ export class BookStorageService extends BaseApiService {
     sort?: string
   ): Observable<BookPage> {
     var params = new HttpParams();
-    params = params.append("page", page.toString());
-    params = params.append("size", size.toString());
-    params = params.append("keyword",keyword);
-    if (sort != undefined && sort != "" && sort != null) {
-      params = params.append("sort", sort);
+    params = params.append('page', page.toString());
+    params = params.append('size', size.toString());
+    params = params.append('keyword', keyword);
+    if (sort != undefined && sort != '' && sort != null) {
+      params = params.append('sort', sort);
     }
     return this.getElements(this.searchEP, { params });
   }
@@ -76,13 +76,13 @@ export class BookStorageService extends BaseApiService {
 
   public postFile(fileToUpload: File): Observable<any> {
     const formData: FormData = new FormData();
-    formData.append("file", fileToUpload, fileToUpload.name);
+    formData.append('file', fileToUpload, fileToUpload.name);
     return this.http.post(this.environmentUrl + this.imagesEP, formData);
   }
 
   public changeBookStatus(id: number): Observable<boolean> {
     return this.http.put<boolean>(
-      this.environmentUrl + this.baseEndPoint + this.updateStatusEP + "/" + id,
+      this.environmentUrl + this.baseEndPoint + this.updateStatusEP + '/' + id,
       null
     );
   }

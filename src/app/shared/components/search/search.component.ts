@@ -1,10 +1,10 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
-import { Book } from "../../model/book.model";
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Book } from '../../model/book.model';
 
 @Component({
-  selector: "app-search",
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.scss"],
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
   @Input() books: Array<Book> = [];
@@ -17,11 +17,11 @@ export class SearchComponent implements OnInit {
   ngOnInit() {}
 
   public onSearch() {
-    var booksSearch: Book[] = [];
-    console.log("book on search component: ");
+    let booksSearch: Book[] = [];
+    console.log('book on search component: ');
     console.log(this.books);
 
-    if (this.search.trim() == "") {
+    if (this.search.trim() == '') {
       booksSearch = [...this.books];
     } else {
       this.books.forEach((book: Book) => {

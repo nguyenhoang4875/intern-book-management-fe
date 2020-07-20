@@ -1,16 +1,16 @@
-import { SearchComponent } from "./components/search/search.component";
-import { RouterModule } from "@angular/router";
-import { BookDetailComponent } from "./components/book-detail/book-detail.component";
-import { BookEditComponent } from "./components/book-edit/book-edit.component";
-import { BookItemComponent } from "./components/book-item/book-item.component";
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MaterialModule } from "../material.module";
-import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
-import { MatDialogModule } from "@angular/material";
-import { DropdownDirective } from "./dropdown.directive";
-import { DateAgoPipe } from "./pipes/date-ago.pipe";
+import { SearchComponent } from './components/search/search.component';
+import { RouterModule } from '@angular/router';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { BookEditComponent } from './components/book-edit/book-edit.component';
+import { BookItemComponent } from './components/book-item/book-item.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material.module';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material';
+import { DropdownDirective } from './dropdown.directive';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { CKEditorModule } from 'ckeditor4-angular';
 
 const components = [
@@ -29,7 +29,7 @@ const modules = [
   MaterialModule,
   RouterModule,
   MatDialogModule,
-  CKEditorModule
+  CKEditorModule,
 ];
 
 @NgModule({

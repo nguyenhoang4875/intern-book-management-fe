@@ -1,6 +1,6 @@
-import { OnInit } from "@angular/core";
-import { BookStorageService } from "src/app/shared/services/book-storage.service";
-import { Book } from "src/app/shared/model/book.model";
+import { OnInit } from '@angular/core';
+import { BookStorageService } from 'src/app/shared/services/book-storage.service';
+import { Book } from 'src/app/shared/model/book.model';
 
 export abstract class BookAbstract {
   protected books: Book[] = [];

@@ -1,4 +1,4 @@
-import { SortByEnum } from "../enums/sort-type.enum";
+import { SortByEnum } from '../enums/sort-type.enum';
 
 export interface Header {
   name: string;

@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-} from "@angular/router";
-import { AuthenticationService } from "./authentication.service";
+} from '@angular/router';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
   constructor(
@@ -20,7 +20,7 @@ export class AuthGuardService implements CanActivate {
     if (this.authService.getUserFromLocalStorage()) {
       return true;
     }
-    this.router.navigate(["login"]);
+    this.router.navigate(['login']);
     return false;
   }
 }

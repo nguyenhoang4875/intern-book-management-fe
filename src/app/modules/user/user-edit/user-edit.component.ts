@@ -1,13 +1,13 @@
-import { UserStorageService } from "./../../../shared/services/user-storage.service";
-import { UserDetail } from "./../../../shared/model/user-detail.model";
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router, Params } from "@angular/router";
-import { environment } from "src/environments/environment.prod";
+import { UserStorageService } from './../../../shared/services/user-storage.service';
+import { UserDetail } from './../../../shared/model/user-detail.model';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
-  selector: "app-user-edit",
-  templateUrl: "./user-edit.component.html",
-  styleUrls: ["./user-edit.component.scss"],
+  selector: 'app-user-edit',
+  templateUrl: './user-edit.component.html',
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
   userDetail: UserDetail = new UserDetail();
@@ -24,9 +24,9 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params["id"];
-      this.editMode = params["id"] != null;
-      console.log("edit mode: " + this.editMode);
+      this.id = +params['id'];
+      this.editMode = params['id'] != null;
+      console.log('edit mode: ' + this.editMode);
       if (this.id != null) {
         this.userStorageService
           .getElementById(this.id)
@@ -44,38 +44,36 @@ export class UserEditComponent implements OnInit {
 
   onSaveUser() {
     if (this.editMode) {
-      if (this.fileToUpload != null && this.fileToUpload != undefined) {
+      if (this.fileToUpload != null && this.fileToUpload !== undefined) {
         this.userStorageService
           .postFile(this.fileToUpload)
           .subscribe((response) => {
             this.userDetail.avatar =
-              this.environmentUrl + "images/" + response.fileName;
-              this.userStorageService.updateUser(
-                this.userDetail.id,
-                this.userDetail
-              ).subscribe((response: UserDetail) => {
-              console.log(response.avatar);
-              this.userDetail = response;
-              this.router.navigate(["../../"], { relativeTo: this.route });
-            });
+              this.environmentUrl + 'images/' + response.fileName;
+            this.userStorageService
+              .updateUser(this.userDetail.id, this.userDetail)
+              .subscribe((response: UserDetail) => {
+                console.log(response.avatar);
+                this.userDetail = response;
+                this.router.navigate(['../../'], { relativeTo: this.route });
+              });
           });
       } else {
-        this.userStorageService.updateUser(
-          this.userDetail.id,
-          this.userDetail
-        ).subscribe((response: UserDetail) => {
-          console.log(response.avatar);
-          this.userDetail = response;
-          this.router.navigate(["../../"], { relativeTo: this.route });
-        });
+        this.userStorageService
+          .updateUser(this.userDetail.id, this.userDetail)
+          .subscribe((response: UserDetail) => {
+            console.log(response.avatar);
+            this.userDetail = response;
+            this.router.navigate(['../../'], { relativeTo: this.route });
+          });
       }
     } else {
       this.userStorageService.addUser(this.userDetail).subscribe();
-          this.router.navigate(["../"], { relativeTo: this.route });
+      this.router.navigate(['../'], { relativeTo: this.route });
     }
   }
 
   onCancel() {
-    this.router.navigate(["../../"], { relativeTo: this.route });
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

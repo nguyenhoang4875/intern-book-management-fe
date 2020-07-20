@@ -1,14 +1,14 @@
-import { UserStorageService } from "./../../../../shared/services/user-storage.service";
-import { UserDetail } from "./../../../../shared/model/user-detail.model";
-import { Router } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "src/app/shared/services/authentication.service";
-import { User } from "src/app/shared/model/user.model";
+import { UserStorageService } from './../../../../shared/services/user-storage.service';
+import { UserDetail } from './../../../../shared/model/user-detail.model';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { User } from 'src/app/shared/model/user.model';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   public isLogin: boolean;

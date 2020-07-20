@@ -1,14 +1,14 @@
-import { LocalStorageEnum } from "./../enums/local-storage.enum";
-import { Injectable } from "@angular/core";
+import { LocalStorageEnum } from './../enums/local-storage.enum';
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-} from "@angular/common/http";
-import { User } from "../model/user.model";
+} from '@angular/common/http';
+import { User } from '../model/user.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class BasicAuthHttpInterceptorService implements HttpInterceptor {
   constructor() {}
@@ -19,7 +19,7 @@ export class BasicAuthHttpInterceptorService implements HttpInterceptor {
     if (user) {
       req = req.clone({
         setHeaders: {
-          Authorization: "Bearer " + currentUser.token,
+          Authorization: 'Bearer ' + currentUser.token,
         },
       });
     }

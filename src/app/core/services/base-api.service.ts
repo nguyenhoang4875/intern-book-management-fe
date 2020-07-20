@@ -1,10 +1,10 @@
-import { environment } from "./../../../environments/environment.prod";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { environment } from './../../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export abstract class BaseApiService {
   public readonly environmentUrl = environment.baseUrl;
@@ -21,11 +21,18 @@ export abstract class BaseApiService {
   }
 
   public updateElement(id: number, parameter: any): Observable<any> {
-    return this.http.put( `${this.environmentUrl}${this.baseEndPoint}/${id}`, parameter);
+    return this.http.put(
+      `${this.environmentUrl}${this.baseEndPoint}/${id}`,
+      parameter
+    );
   }
 
   public createElement(path?: string, parameter?: any): Observable<any> {
-    return this.http.post(`${this.environmentUrl}${this.baseEndPoint}${path}`|| `${this.environmentUrl}${this.baseEndPoint}`, parameter);
+    return this.http.post(
+      `${this.environmentUrl}${this.baseEndPoint}${path}` ||
+        `${this.environmentUrl}${this.baseEndPoint}`,
+      parameter
+    );
   }
 
   public getElementById(id: number, parameter?: any): Observable<any> {
@@ -34,10 +41,11 @@ export abstract class BaseApiService {
       parameter
     );
   }
-  
+
   public deleteElementById(id: number, parameter?: any): Observable<any> {
     return this.http.delete(
-      `${this.environmentUrl}${this.baseEndPoint}/${id}`,parameter
+      `${this.environmentUrl}${this.baseEndPoint}/${id}`,
+      parameter
     );
   }
 }

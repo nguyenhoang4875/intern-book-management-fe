@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-import { Comment } from "../../shared/model/comment.model";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Comment } from '../../shared/model/comment.model';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CommentService {
   commentsChange = new Subject<Comment[]>();
